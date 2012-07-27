@@ -24,7 +24,7 @@ package
 				  
 		public function callAsync():void{
 			
-			var req:URLRequest = Worker.current.getSharedProperty("jp.akb7.concurrent.URLLoader.request") as URLRequest;
+			var req:URLRequest = Worker.current.getSharedProperty("jp.akb7.concurrent.URLLoaderCommand.request") as URLRequest;
 			if( req == null ){
 				return;
 			}

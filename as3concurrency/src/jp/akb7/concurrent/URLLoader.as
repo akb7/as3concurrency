@@ -31,7 +31,7 @@ package jp.akb7.concurrent
 		protected override function doCreateWorker(runnable:ByteArray):Worker
 		{
 			var result:Worker = super.doCreateWorker(runnable);
-			result.setSharedProperty("jp.akb7.concurrent.URLLoader.request",_req);
+			result.setSharedProperty("jp.akb7.concurrent.URLLoaderCommand.request",_req);
 			return result;
 		}
 	}
