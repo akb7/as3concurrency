@@ -34,22 +34,24 @@ package
 	import jp.akb7.concurrent.AsyncCallable;
 	import jp.akb7.concurrent.Command;
 	import jp.akb7.concurrent.Fault;
-	
+    
+    [ExcludeClass]
 	public class URLLoaderCommand extends Command implements AsyncCallable
 	{	
 		{
 			registerClassAlias("flash.net.URLRequest",flash.net.URLRequest);
             registerClassAlias("jp.akb7.concurrent.Fault",jp.akb7.concurrent.Fault);
 		}
+        
+        private var _urlRequest:URLRequest;
 		
 		public function URLLoaderCommand(){
 			super();   
 		}
 				  
 		public function callAsync():void{
-			
-			var req:URLRequest = Worker.current.getSharedProperty("jp.akb7.concurrent.URLLoaderCommand.request") as URLRequest;
-			if( req == null ){
+            _urlRequest = Worker.current.getSharedProperty("jp.akb7.concurrent.URLLoaderCommand.request") as URLRequest;
+			if( _urlRequest == null ){
 				return;
 			}
 			var urlstream:URLStream = new URLStream();
@@ -58,16 +60,16 @@ package
 			urlstream.addEventListener(SecurityErrorEvent.SECURITY_ERROR,urlstream_securityErrorHandler);
 			urlstream.addEventListener(IOErrorEvent.IO_ERROR,urlstream_ioErrorHandler);
             try{
-			    urlstream.load(req);
+			    urlstream.load(_urlRequest);
             } catch(e:Error){
                 setError(e.errorID,e.name,e.message);
             }
-		}
+		} 
         
         protected function urlstream_httpStatusHandler(event:HTTPStatusEvent):void
         {
             if( event.status >= 400 ){
-                setError(event.status,event.type,event.responseURL);
+                setError(event.status,event.type,_urlRequest.url);
             }
         }
 		
