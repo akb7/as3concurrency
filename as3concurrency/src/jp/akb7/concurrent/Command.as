@@ -75,7 +75,8 @@ package jp.akb7.concurrent
 			} else if( this is Callable ){
 				_channel = Worker.current.getSharedProperty(FutureTask.IN_CHANNEL);
 				var result:Object = (this as Callable).call();
-				setResult(result);
+			    setResult(result);
+                _channel = null;
 			} else {
 				run();
 			}

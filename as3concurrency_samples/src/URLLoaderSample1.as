@@ -9,8 +9,12 @@ package
     public class URLLoaderSample1 extends Sprite{
         public function URLLoaderSample1(){
 			var req:URLRequest = new URLRequest("test.txt");
-			var text:ByteArray = new URLLoader().load(req) as ByteArray;
-			trace(text.readUTFBytes(text.bytesAvailable));
+            try{
+			    var text:ByteArray = new URLLoader().load(req) as ByteArray;
+                trace(text.readUTFBytes(text.bytesAvailable));
+            } catch(e:Error){
+                trace(e);
+            }
         }
     }
 } 

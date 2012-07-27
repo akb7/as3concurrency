@@ -26,6 +26,7 @@ package jp.akb7.concurrent.events
     public class FutureEvent extends Event
     {
         public static const RESULT:String = "result";
+        public static const FAULT:String = "fault";
         
         public var data:Object;
         

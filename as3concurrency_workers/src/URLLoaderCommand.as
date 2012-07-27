@@ -22,6 +22,7 @@
 package 
 {
 	import flash.events.Event;
+	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
@@ -32,11 +33,13 @@ package
 	
 	import jp.akb7.concurrent.AsyncCallable;
 	import jp.akb7.concurrent.Command;
+	import jp.akb7.concurrent.Fault;
 	
 	public class URLLoaderCommand extends Command implements AsyncCallable
 	{	
 		{
 			registerClassAlias("flash.net.URLRequest",flash.net.URLRequest);
+            registerClassAlias("jp.akb7.concurrent.Fault",jp.akb7.concurrent.Fault);
 		}
 		
 		public function URLLoaderCommand(){
@@ -51,10 +54,22 @@ package
 			}
 			var urlstream:URLStream = new URLStream();
 			urlstream.addEventListener(Event.COMPLETE,urlstream_completeHandler);
-			urlstream.addEventListener(SecurityErrorEvent.SECURITY_ERROR,urlstream_errorHandler);
-			urlstream.addEventListener(IOErrorEvent.IO_ERROR,urlstream_errorHandler);
-			urlstream.load(req);
+            urlstream.addEventListener(HTTPStatusEvent.HTTP_STATUS,urlstream_httpStatusHandler);
+			urlstream.addEventListener(SecurityErrorEvent.SECURITY_ERROR,urlstream_securityErrorHandler);
+			urlstream.addEventListener(IOErrorEvent.IO_ERROR,urlstream_ioErrorHandler);
+            try{
+			    urlstream.load(req);
+            } catch(e:Error){
+                setError(e.errorID,e.name,e.message);
+            }
 		}
+        
+        protected function urlstream_httpStatusHandler(event:HTTPStatusEvent):void
+        {
+            if( event.status >= 400 ){
+                setError(event.status,event.type,event.responseURL);
+            }
+        }
 		
 		protected function urlstream_completeHandler(event:Event):void
 		{
@@ -63,10 +78,24 @@ package
 			urlstream.readBytes(ba,0,urlstream.bytesAvailable);
 			setResult(ba);
 		}
+        
+        protected function urlstream_securityErrorHandler(event:SecurityErrorEvent):void
+        {
+            setError(event.errorID,event.type,event.text);
+        }
 		
-		protected function urlstream_errorHandler(event:Event):void
+		protected function urlstream_ioErrorHandler(event:IOErrorEvent):void
 		{
-			setResult(null);
+            setError(event.errorID,event.type,event.text);
 		}
+        
+        protected function setError(errorID:int,name:*,message:*):void
+        {
+            var f:Fault = new Fault();
+            f.errrorID = errorID;
+            f.name = name;
+            f.message = message;
+            setResult(f);
+        }
 	}
 }

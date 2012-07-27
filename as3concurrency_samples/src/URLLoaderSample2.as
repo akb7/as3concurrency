@@ -12,13 +12,19 @@ package
 			var req:URLRequest = new URLRequest("test.txt");
 			var loader:URLLoader = new URLLoader()
 			loader.addEventListener(FutureEvent.RESULT,loader_resultHandler,false,0,true);
+            loader.addEventListener(FutureEvent.FAULT,loader_faultHandler,false,0,true);
 			loader.loadAsync(req);
         }
-		
-		protected function loader_resultHandler(event:FutureEvent):void
-		{
-			var text:ByteArray = event.data as ByteArray;
-			trace(text.readUTFBytes(text.bytesAvailable));
-		}
+        
+        protected function loader_resultHandler(event:FutureEvent):void
+        {
+            var text:ByteArray = event.data as ByteArray;
+            trace(text.readUTFBytes(text.bytesAvailable));
+        }
+        
+        protected function loader_faultHandler(event:FutureEvent):void
+        {
+            trace(event.data);
+        }
 	}
 } 

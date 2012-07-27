@@ -21,6 +21,7 @@
  *****************************************************/
 package jp.akb7.concurrent 
 {
+	import flash.events.Event;
 	import flash.net.URLRequest;
 	import flash.net.registerClassAlias;
 	import flash.system.Worker;
@@ -32,6 +33,7 @@ package jp.akb7.concurrent
 		
 		{
 			registerClassAlias("flash.net.URLRequest",flash.net.URLRequest);
+            registerClassAlias("jp.akb7.concurrent.Fault",jp.akb7.concurrent.Fault);
 		}
 		
 		public function URLLoader(){

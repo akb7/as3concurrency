@@ -27,6 +27,7 @@ package jp.akb7.concurrent
     import flash.system.MessageChannel;
     import flash.system.Worker;
     import flash.utils.ByteArray;
+    
     import jp.akb7.concurrent.events.FutureEvent;
 	
 	[Event(name="result", type="jp.akb7.concurrent.events.FutureEvent")]
@@ -50,16 +51,23 @@ package jp.akb7.concurrent
 			super(runnable,name,condition,mutex,sharedMemory);
 		}
         
-        public function getResult(timeout:Number=-1):Object{ 
+        public final function getResult(timeout:Number=-1):Object{ 
             //ワーカー開始
 			doPrepare();
 			var result:Object = _inchannel.receive(true);
+            if( result is Fault ){
+                var f:Fault = result as Fault;
+                var error:Error = new Error(f.message,f.errrorID);
+                error.name = f.name;
+                terminate();
+                throw error;
+            }
             _running = false;
             _isDone = true;
             return result;
         }
         
-        public function getResultAsync():void{
+        public final function getResultAsync():void{
             //ワーカー開始
             doPrepare();
 			_inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
@@ -99,11 +107,16 @@ package jp.akb7.concurrent
             //メッセージチャンネルにメッセージがあるかどうか
             if( _inchannel.messageAvailable ){
                 //メッセージチャンネルに受信
-                var message:Object = _inchannel.receive();
                 _isDone = true;
                 
-                var event:FutureEvent = new FutureEvent(FutureEvent.RESULT);
-                event.data = message;
+                var data:Object = _inchannel.receive();
+                var event:FutureEvent;
+                if( data is Fault ){
+                    event = new FutureEvent(FutureEvent.FAULT);
+                } else {
+                    event = new FutureEvent(FutureEvent.RESULT);
+                }
+                event.data = data;
                 dispatchEvent(event);
                 
 				terminate();
