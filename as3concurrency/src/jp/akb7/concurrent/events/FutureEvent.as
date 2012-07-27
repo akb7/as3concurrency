@@ -19,7 +19,7 @@
  *  All Rights Reserved. 
  *  
  *****************************************************/
-package jp.akb7.concurrent 
+package jp.akb7.concurrent.events 
 {
     import flash.events.Event;
     

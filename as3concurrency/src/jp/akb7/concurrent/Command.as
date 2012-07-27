@@ -24,6 +24,7 @@ package jp.akb7.concurrent
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
     import flash.display.Sprite;
+    import flash.errors.IllegalOperationError;
     import flash.system.MessageChannel;
     import flash.system.MessageChannelState;
     import flash.system.Worker;
@@ -81,6 +82,7 @@ package jp.akb7.concurrent
         }
 
         public function run():void{
+            throw new IllegalOperationError("not impl");
         }
 		
 		protected final function setResult(result:Object):void

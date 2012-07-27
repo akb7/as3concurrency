@@ -27,8 +27,9 @@ package jp.akb7.concurrent
     import flash.system.MessageChannel;
     import flash.system.Worker;
     import flash.utils.ByteArray;
+    import jp.akb7.concurrent.events.FutureEvent;
 	
-	[Event(name="result", type="jp.akb7.concurrent.FutureEvent")]
+	[Event(name="result", type="jp.akb7.concurrent.events.FutureEvent")]
     public class FutureTask extends Task implements Future
     {
 		public static const IN_CHANNEL:String = "jp.akb7.concurrent.FutureTask.inchannel";
@@ -43,6 +44,8 @@ package jp.akb7.concurrent
         
         private var _running:Boolean = false;
         
+        private var _isDone:Boolean = false;
+        
         public function FutureTask(runnable:ByteArray,name:String=null,condition:Condition=null,mutex:Mutex=null,sharedMemory:ByteArray=null){
 			super(runnable,name,condition,mutex,sharedMemory);
 		}
@@ -52,6 +55,7 @@ package jp.akb7.concurrent
 			doPrepare();
 			var result:Object = _inchannel.receive(true);
             _running = false;
+            _isDone = true;
             return result;
         }
         
@@ -60,6 +64,10 @@ package jp.akb7.concurrent
             doPrepare();
 			_inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
 			_inchannel.receive();
+        }
+        
+        public function isDone():Boolean{
+            return _isDone;
         }
 		
 		protected final function doPrepare():void{
@@ -92,6 +100,7 @@ package jp.akb7.concurrent
             if( _inchannel.messageAvailable ){
                 //メッセージチャンネルに受信
                 var message:Object = _inchannel.receive();
+                _isDone = true;
                 
                 var event:FutureEvent = new FutureEvent(FutureEvent.RESULT);
                 event.data = message;

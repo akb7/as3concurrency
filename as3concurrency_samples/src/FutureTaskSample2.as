@@ -2,7 +2,7 @@ package
 {
     import flash.display.Sprite;
     
-    import jp.akb7.concurrent.FutureEvent;
+    import jp.akb7.concurrent.events.FutureEvent;
     import jp.akb7.concurrent.FutureTask;
     
     public class FutureTaskSample2 extends Sprite{

@@ -21,10 +21,7 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-	public class ExecutorService
+	public interface ExecutorService
 	{
-		public function ExecutorService()
-		{
-		}
 	}
 }

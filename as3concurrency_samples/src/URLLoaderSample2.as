@@ -4,7 +4,7 @@ package
     import flash.net.URLRequest;
     import flash.utils.ByteArray;
     
-    import jp.akb7.concurrent.FutureEvent;
+    import jp.akb7.concurrent.events.FutureEvent;
     import jp.akb7.concurrent.URLLoader;
 	
     public class URLLoaderSample2 extends Sprite{
