@@ -35,7 +35,7 @@ package jp.akb7.concurrent
 		}
 		
 		public function URLLoader(){
-			super(Workers.URLLoaderCommand);
+			super(InternalWorkers.URLLoaderCommand);
 		}
 		
 		public function load(req:URLRequest,timeout:Number=-1):Object{
