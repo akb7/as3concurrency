@@ -14,8 +14,8 @@
  *  under the License.
  *   
  *  
- *  The Initial Developer of the Original Code is Adobe Systems Incorporated.
- *  Portions created by Adobe Systems Incorporated are Copyright (C) 2012 AKABANA
+ *  The Initial Developer of the Original Code is AKABANA.
+ *  Portions created by AKABANA are Copyright (C) 2012 AKABANA
  *  Incorporated. All Rights Reserved. 
  *  
  *****************************************************/
