@@ -1,8 +1,7 @@
-package jp.akb7.concurrent
-{
+package jp.akb7.concurrent {
+    
     [ExcludeClass]
-    public final class Fault
-    {
+    public final class Fault {
         public var errrorID:int;
         
         public var name:*;
@@ -10,3 +9,5 @@ package jp.akb7.concurrent
         public var message:*;
     }
 }
+
+
