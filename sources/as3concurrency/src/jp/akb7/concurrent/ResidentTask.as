@@ -37,7 +37,6 @@ package jp.akb7.concurrent
         
         public final function invokeMethod(methodName:String,args:Array=null):Object{
             _outchannel.send([INVOKE,methodName].concat(args));
-            //waiting for callback
             var result:Object = _inchannel.receive(true);
             if(result is Fault) {
                 var f:Fault=result as Fault;

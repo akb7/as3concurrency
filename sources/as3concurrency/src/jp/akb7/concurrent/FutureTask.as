@@ -39,7 +39,6 @@ package jp.akb7.concurrent {
         }
 
         public final function getResult(timeout:Number=-1):Object {
-            //ワーカー開始
             start();
             var result:Object=_inchannel.receive(true);
             
@@ -54,7 +53,6 @@ package jp.akb7.concurrent {
         }
         
         public final function getResultAsync():void {
-            //ワーカー開始
             start();
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
