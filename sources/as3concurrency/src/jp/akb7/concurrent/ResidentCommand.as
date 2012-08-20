@@ -21,15 +21,15 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-	import flash.errors.IllegalOperationError;
-	import flash.events.Event;
+    import flash.errors.IllegalOperationError;
+    import flash.events.Event;
     
-	public class ResidentCommand extends Command
-	{
-		public function ResidentCommand()
-		{
-			super();
-		}
+    public class ResidentCommand extends Command
+    {
+        public function ResidentCommand()
+        {
+            super();
+        }
         
         public override final function run():void {
             _outchannel=getOutChannel();
@@ -37,11 +37,11 @@ package jp.akb7.concurrent
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
         
-		public function doInvoke(mesasges:Array):void{
+        public function doInvoke(mesasges:Array):void{
             var funcName:String = mesasges.shift();
             
             try{
-			    var f:Function = this[funcName];
+                var f:Function = this[funcName];
                 var result:Object = f.apply(null,mesasges);
                 setResult(result);
             } catch(e:Error){
@@ -51,23 +51,30 @@ package jp.akb7.concurrent
                 fault.name = e.name;
                 setResult(result);
             }
-		}
-		
-		protected override function inchannel_channelMessageHandler(event:Event):void
-		{	
-			if (_inchannel.messageAvailable)
-			{
-				var data:Object = _inchannel.receive();
-				if( data is Array ){
-					var mesasges:Array = data as Array;
-					if( mesasges.length > 0 ){
-						var methodName:String = mesasges.shift();
-						if( methodName == "jp.akb7.concurrent.ResidentTask.invoke"){
+        }
+        
+        protected override function inchannel_channelMessageHandler(event:Event):void
+        {    
+            if (_inchannel.messageAvailable)
+            {
+                var data:Object = _inchannel.receive();
+                if( data is Array ){
+                    var mesasges:Array = data as Array;
+                    if( mesasges.length > 0 ){
+                        var methodName:String = mesasges.shift();
+                        if( methodName == "jp.akb7.concurrent.ResidentTask.invoke"){
                             doInvoke(mesasges);
-						}
-					}
-				}
-			}
-		}
-	}
+                            return;
+                        }
+                    }
+                }
+                
+                var fault:Fault=new Fault();
+                fault.errrorID = 0;
+                fault.message = "Invoke Error";
+                fault.name = "jp.akb7.concurrent.ResidentCommand.Error";
+                setResult(fault);
+            }
+        }
+    }
 }
