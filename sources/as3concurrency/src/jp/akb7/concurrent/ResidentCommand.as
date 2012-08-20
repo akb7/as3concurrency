@@ -64,9 +64,16 @@ package jp.akb7.concurrent
                         var methodName:String = mesasges.shift();
                         if( methodName == "jp.akb7.concurrent.ResidentTask.invoke"){
                             doInvoke(mesasges);
+                            return;
                         }
                     }
                 }
+                
+                var fault:Fault=new Fault();
+                fault.errrorID = 0;
+                fault.message = "Invoke Error";
+                fault.name = "jp.akb7.concurrent.ResidentCommand.Error";
+                setResult(fault);
             }
         }
     }
