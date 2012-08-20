@@ -12,10 +12,10 @@ package
             var m:Mutex = new Mutex();
             var c:Condition = new Condition(m);
             
-            var th1:Task = new Task(Workers.ConditionCommand1,"thread-1",c);
-            var th2:Task = new Task(Workers.ConditionCommand1,"thread-2",c);
+            var th1:Task = new Task(Workers.ConditionCommand1,"commnad-1",c);
+            var th2:Task = new Task(Workers.ConditionCommand1,"commnad-2",c);
             
-            trace("main - threads - start");
+            trace("main - commnads - start");
             th1.start();
             th2.start();
             
@@ -25,7 +25,7 @@ package
                 var s:String = ""+i;
             }
             
-            trace("main - thread - notifyAll");
+            trace("main - commnad - notifyAll");
             c.mutex.lock();
             c.notifyAll();
             c.mutex.unlock();

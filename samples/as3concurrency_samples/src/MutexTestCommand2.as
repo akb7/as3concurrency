@@ -7,14 +7,14 @@ package
         public override function run():void{
             
             if(mutex.tryLock()){
-                trace(name+"MutexTestRunnable.run() - start");
+                trace(name+":MutexTestRunnable.run() - start");
                 for (var i:int = 0; i < 10; i++) 
                 {
                     trace(name+"["+i+"]");
                 }
-                trace(name+"MutexTestRunnable.run() - end : ");
+                trace(name+":MutexTestRunnable.run() - end : ");
             } else {
-                trace(name+"MutexTestRunnable.run() - ng : ");
+                trace(name+":MutexTestRunnable.run() - ng : ");
             }
         }
     }
