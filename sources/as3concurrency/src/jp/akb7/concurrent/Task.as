@@ -66,7 +66,7 @@ package jp.akb7.concurrent {
         
         private var _sharedMemory:ByteArray;
         
-        private var _runnable:ByteArray;
+        private var _workerByteArray:ByteArray;
         
         public function get isRunning():Boolean
         {
@@ -78,17 +78,17 @@ package jp.akb7.concurrent {
             return _worker==null ? null:_worker.state;
         }
         
-        public function Task(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
+        public function Task(workerByteArray:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
             this._name=name;
             this._condition=condition;
             this._mutex=mutex;
             this._sharedMemory=sharedMemory;
-            this._runnable=runnable;
+            this._workerByteArray=workerByteArray;
         }
         
         public final function start():void {
             if( _worker == null ){
-                _worker=doCreateWorker(_runnable);
+                _worker=doCreateWorker();
                 doPrepare();
                 _worker.start();
             }
@@ -109,8 +109,8 @@ package jp.akb7.concurrent {
             _worker=null;
         }
         
-        protected function doCreateWorker(runnable:ByteArray):Worker {
-            var result:Worker=WorkerDomain.current.createWorker(runnable);
+        protected function doCreateWorker():Worker {
+            var result:Worker=WorkerDomain.current.createWorker(_workerByteArray);
             
             if(_sharedMemory != null) {
                 result.setSharedProperty(SHAREDMEMORY, _sharedMemory);
