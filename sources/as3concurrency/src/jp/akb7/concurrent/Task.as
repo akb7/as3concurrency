@@ -23,11 +23,17 @@ package jp.akb7.concurrent {
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
     import flash.events.EventDispatcher;
+    import flash.net.registerClassAlias;
     import flash.system.Worker;
     import flash.system.WorkerDomain;
     import flash.utils.ByteArray;
     
     public class Task extends EventDispatcher {
+        
+        {
+            registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
+        }
+        
         public static const NAME:String="jp.akb7.concurrent.Task.name";
         public static const RUNNABLE:String="jp.akb7.concurrent.Task.runnable";
         public static const CONDITION:String="jp.akb7.concurrent.Task.condition";
@@ -55,14 +61,21 @@ package jp.akb7.concurrent {
         }
         
         public final function start():void {
-            _worker=doCreateWorker(_runnable);
-            _worker.start();
+            if( _worker == null ){
+                _worker=doCreateWorker(_runnable);
+                doPrepare();
+                _worker.start();
+            }
         }
         
         public final function terminate():void {
             if(_worker != null) {
                 doTerminateWorker();
             }
+        }
+        
+        protected function doPrepare():void {
+            
         }
         
         protected function doTerminateWorker():void {
