@@ -21,6 +21,13 @@ package {
             var sum1:Object = task.invokeMethod("test",[4,5,6]);
             trace("sum:"+sum1);
             
+            try{
+                var sum2:Object = task.invokeMethod("tesat",[4,5,6]);
+                trace("sum:"+sum2);
+            }catch(e:Error){
+                trace(e.name+":"+e.message);
+            }
+            
             task.addEventListener(FutureEvent.RESULT,task_resultHandler);
             task.invokeAsyncMethod("test",[7,8,9]);
             trace("called");
