@@ -1,9 +1,12 @@
 # Build and Release Folders
 bin-debug/
 bin-release/
+bin/
+workerswfs/
 
 # Project property files
 .actionScriptProperties
 .flexProperties
 .settings/
 .project
+.metadata
