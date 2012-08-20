@@ -13,10 +13,10 @@ package
 	public class Workers
 	{
 		
-		[Embed(source="../bin-debug/HighLoadCallableCommand.swf", mimeType="application/octet-stream")]
+		[Embed(source="../workerswfs/HighLoadCallableCommand.swf", mimeType="application/octet-stream")]
 		private static var HighLoadCallableCommand_ByteClass:Class;
 		
-		[Embed(source="../bin-debug/HighLoadCommand.swf", mimeType="application/octet-stream")]
+		[Embed(source="../workerswfs/HighLoadCommand.swf", mimeType="application/octet-stream")]
 		private static var HighLoadCommand_ByteClass:Class;
 		
 		[Embed(source="../workerswfs/NestCallCommand.swf", mimeType="application/octet-stream")]
