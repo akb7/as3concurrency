@@ -36,9 +36,10 @@ package {
     import jp.akb7.concurrent.Fault;
 
     public class URLLoaderCommand extends Command implements AsyncCallable {
+
         {
             registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
-            registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
+            registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
         }
         
         private var _urlRequest:URLRequest;

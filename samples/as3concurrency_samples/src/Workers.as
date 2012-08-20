@@ -25,6 +25,17 @@ package
         [Embed(source="../workerswfs/MutexTestCommand2.swf", mimeType="application/octet-stream")]
         private static var MutexTestCommand2_ByteClass:Class;
         
+        [Embed(source="../workerswfs/HighLoadCallableCommand.swf", mimeType="application/octet-stream")]
+        private static var HighLoadCallableCommand_ByteClass:Class;
+        
+        [Embed(source="../workerswfs/HighLoadCommand.swf", mimeType="application/octet-stream")]
+        private static var HighLoadCommand_ByteClass:Class;
+        
+        [Embed(source="../workerswfs/ResidentCommand2.swf", mimeType="application/octet-stream")]
+        private static var ResidentCommand2_ByteClass:Class;
+        
+        
+        
         public static function get ResidentCommand1():ByteArray
         {
             return new ResidentCommand1_ByteClass();
@@ -44,6 +55,23 @@ package
         {
             return new MutexTestCommand2_ByteClass();
         }
+        
+        public static function get HighLoadCallableCommand():ByteArray
+        {
+            return new HighLoadCallableCommand_ByteClass();
+        }
+        
+        public static function get HighLoadCommand():ByteArray
+        {
+            return new HighLoadCommand_ByteClass();
+        }
+        
+        public static function get ResidentCommand2():ByteArray
+        {
+            return new ResidentCommand2_ByteClass();
+        }
+        
+        
         
         
     }

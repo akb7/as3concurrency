@@ -26,7 +26,7 @@ package jp.akb7.concurrent
     import flash.events.Event;
     import flash.utils.ByteArray;
     
-    public class ResidentTask extends FutureTask
+    public class ResidentTask extends Task
     {
         public static const INVOKE:String="jp.akb7.concurrent.ResidentTask.invoke";
         
@@ -57,7 +57,17 @@ package jp.akb7.concurrent
         }
         
         private function inchannel_channelMessageHandler(e:Event):void {
-            doParseReciveMessage();
+            //メッセージチャンネルにメッセージがあるかどうか
+            if(_inchannel.messageAvailable) {
+                //メッセージチャンネルに受信
+                var data:Object=_inchannel.receive();
+                doParseReciveMessage(data);
+                _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+            }
+        }
+        
+        protected final override function doPrepare():void {
+            setupMessageChannel();
         }
     }
 }
