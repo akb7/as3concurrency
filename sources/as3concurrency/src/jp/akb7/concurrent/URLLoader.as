@@ -30,7 +30,6 @@ package jp.akb7.concurrent {
         private var _req:URLRequest;
         
         {
-            registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
             registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
         }
         

@@ -25,8 +25,6 @@ package jp.akb7.concurrent {
         function getResult(timeout:Number=-1):Object;
         
         function getResultAsync():void;
-        
-        function isDone():Boolean;
     }
 }
 
