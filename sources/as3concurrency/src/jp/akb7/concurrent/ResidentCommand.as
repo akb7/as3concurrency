@@ -49,7 +49,7 @@ package jp.akb7.concurrent
                 fault.errrorID = e.errorID;
                 fault.message = e.message;
                 fault.name = e.name;
-                setResult(result);
+                setResult(fault);
             }
         }
         
