@@ -39,8 +39,6 @@ package jp.akb7.concurrent {
         
         private var _sharedMemory:ByteArray;
         
-        private var _runnable:ByteArray;
-        
         protected var _outchannel:MessageChannel;
         
         protected var _inchannel:MessageChannel;
