@@ -42,8 +42,8 @@ package jp.akb7.concurrent {
         private var _runnable:ByteArray;
         
         protected var _outchannel:MessageChannel;
-		
-		protected var _inchannel:MessageChannel;
+        
+        protected var _inchannel:MessageChannel;
         
         public function get mutex():Mutex {
             return _mutex;
@@ -68,9 +68,9 @@ package jp.akb7.concurrent {
             _sharedMemory=Worker.current.getSharedProperty(Task.SHAREDMEMORY);
             
             if(this is AsyncCallable) {
-				doCallAsync();
+                doCallAsync();
             } else if(this is Callable) {
-				doCall();
+                doCall();
             } else {
                 run();
             }
@@ -85,36 +85,36 @@ package jp.akb7.concurrent {
                 _outchannel.send(result);
             }
         }
-		
-		protected function doCall():void {
-			_outchannel=getOutChannel();
-			_inchannel=getInChannel();
-			var result:Object=(this as Callable).call();
-			setResult(result);
-			_outchannel=null;
-		}
-		
-		protected function doCallAsync():void {
-			_outchannel=getOutChannel();
-			_inchannel=getInChannel();
-			(this as AsyncCallable).callAsync();
-		}
-		
-		protected function getOutChannel():MessageChannel {
-			var channel:MessageChannel = Worker.current.getSharedProperty(FutureTask.OUT_CHANNEL);
-			
-			return channel;
-		}
-		protected function getInChannel():MessageChannel {
-			var channel:MessageChannel = Worker.current.getSharedProperty(FutureTask.IN_CHANNEL);
-			
-			return channel;
-		}
-		
-		protected function inchannel_channelMessageHandler(event:Event):void
-		{	
-		}
-	}
+        
+        protected function doCall():void {
+            _outchannel=getOutChannel();
+            _inchannel=getInChannel();
+            var result:Object=(this as Callable).call();
+            setResult(result);
+            _outchannel=null;
+        }
+        
+        protected function doCallAsync():void {
+            _outchannel=getOutChannel();
+            _inchannel=getInChannel();
+            (this as AsyncCallable).callAsync();
+        }
+        
+        protected function getOutChannel():MessageChannel {
+            var channel:MessageChannel = Worker.current.getSharedProperty(FutureTask.OUT_CHANNEL);
+            
+            return channel;
+        }
+        protected function getInChannel():MessageChannel {
+            var channel:MessageChannel = Worker.current.getSharedProperty(FutureTask.IN_CHANNEL);
+            
+            return channel;
+        }
+        
+        protected function inchannel_channelMessageHandler(event:Event):void
+        {    
+        }
+    }
 }
 
 

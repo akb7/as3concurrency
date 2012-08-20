@@ -32,11 +32,11 @@ package jp.akb7.concurrent {
     
     [Event(name="result", type="jp.akb7.concurrent.events.FutureEvent")]
     public class FutureTask extends Task implements Future {
-		public static const IN_CHANNEL:String="jp.akb7.concurrent.FutureTask.inchannel";
+        public static const IN_CHANNEL:String="jp.akb7.concurrent.FutureTask.inchannel";
         public static const OUT_CHANNEL:String="jp.akb7.concurrent.FutureTask.outchannel";
         
         protected var _inchannel:MessageChannel;
-		protected var _outchannel:MessageChannel;
+        protected var _outchannel:MessageChannel;
         
         private var _callable:ByteArray;
         
@@ -83,11 +83,11 @@ package jp.akb7.concurrent {
         protected final override function doPrepare():void {
             //メッセージチャンネル作成
             _inchannel=_worker.createMessageChannel(Worker.current);
-			_outchannel = Worker.current.createMessageChannel(_worker);
+            _outchannel = Worker.current.createMessageChannel(_worker);
             
             //共有プロパティに設定
             _worker.setSharedProperty(OUT_CHANNEL, _inchannel);
-			_worker.setSharedProperty(IN_CHANNEL, _outchannel);
+            _worker.setSharedProperty(IN_CHANNEL, _outchannel);
         }
         
         protected override function doTerminateWorker():void {

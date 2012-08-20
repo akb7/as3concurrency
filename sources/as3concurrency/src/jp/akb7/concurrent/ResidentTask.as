@@ -21,22 +21,22 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-	import flash.concurrent.Condition;
-	import flash.concurrent.Mutex;
-	import flash.events.Event;
-	import flash.utils.ByteArray;
-	
-	public class ResidentTask extends FutureTask
-	{
+    import flash.concurrent.Condition;
+    import flash.concurrent.Mutex;
+    import flash.events.Event;
+    import flash.utils.ByteArray;
+    
+    public class ResidentTask extends FutureTask
+    {
         public static const INVOKE:String="jp.akb7.concurrent.ResidentTask.invoke";
         
-		public function ResidentTask(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null)
-		{
-			super(runnable, name, condition, mutex, sharedMemory);
-		}
-		
-		public final function invokeMethod(methodName:String,args:Array=null):Object{
-			_outchannel.send([INVOKE,methodName].concat(args));
+        public function ResidentTask(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null)
+        {
+            super(runnable, name, condition, mutex, sharedMemory);
+        }
+        
+        public final function invokeMethod(methodName:String,args:Array=null):Object{
+            _outchannel.send([INVOKE,methodName].concat(args));
             
             //waiting for callback
             var result:Object = _inchannel.receive(true);
@@ -47,17 +47,17 @@ package jp.akb7.concurrent
                 throw error;
             }
             return result;
-		}
+        }
         
         public final function invokeAsyncMethod(methodName:String,args:Array=null):void{
-			_outchannel.send([INVOKE,methodName].concat(args));			
+            _outchannel.send([INVOKE,methodName].concat(args));            
             
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
             _inchannel.receive();
-		}
+        }
         
         private function inchannel_channelMessageHandler(e:Event):void {
             doParseReciveMessage();
         }
-	}
+    }
 }
