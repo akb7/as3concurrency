@@ -2,6 +2,7 @@
 bin-debug/
 bin-release/
 bin/
+workerswfs/
 
 # Project property files
 .actionScriptProperties
