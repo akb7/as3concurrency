@@ -62,7 +62,7 @@ package jp.akb7.concurrent {
             if(_inchannel.messageAvailable) {
                 //メッセージチャンネルに受信
                 var data:Object=_inchannel.receive();
-                doParseReciveMessage(data);
+                doParseReceiveMessage(data);
                 terminate();
             }
         }
