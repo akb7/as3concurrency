@@ -24,23 +24,39 @@ package jp.akb7.concurrent {
     import flash.concurrent.Mutex;
     import flash.events.EventDispatcher;
     import flash.net.registerClassAlias;
+    import flash.system.MessageChannel;
     import flash.system.Worker;
     import flash.system.WorkerDomain;
+    import flash.system.WorkerState;
     import flash.utils.ByteArray;
     
+    import jp.akb7.concurrent.events.FutureEvent;
+    
     public class Task extends EventDispatcher {
+        
+        public static const IN_CHANNEL:String="jp.akb7.concurrent.FutureTask.inchannel";
+        
+        public static const OUT_CHANNEL:String="jp.akb7.concurrent.FutureTask.outchannel";
+        
+        public static const NAME:String="jp.akb7.concurrent.Task.name";
+        
+        public static const RUNNABLE:String="jp.akb7.concurrent.Task.runnable";
+        
+        public static const CONDITION:String="jp.akb7.concurrent.Task.condition";
+        
+        public static const MUTEX:String="jp.akb7.concurrent.Task.mutex";
+        
+        public static const SHAREDMEMORY:String="jp.akb7.concurrent.Task.sharedMemory";
         
         {
             registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
         }
         
-        public static const NAME:String="jp.akb7.concurrent.Task.name";
-        public static const RUNNABLE:String="jp.akb7.concurrent.Task.runnable";
-        public static const CONDITION:String="jp.akb7.concurrent.Task.condition";
-        public static const MUTEX:String="jp.akb7.concurrent.Task.mutex";
-        public static const SHAREDMEMORY:String="jp.akb7.concurrent.Task.sharedMemory";
-        
         protected var _worker:Worker;
+        
+        protected var _inchannel:MessageChannel;
+        
+        protected var _outchannel:MessageChannel;
         
         private var _mutex:Mutex;
         
@@ -51,6 +67,16 @@ package jp.akb7.concurrent {
         private var _sharedMemory:ByteArray;
         
         private var _runnable:ByteArray;
+        
+        public function get isRunning():Boolean
+        {
+            return _worker != null && _worker.state == WorkerState.RUNNING;
+        }
+        
+        public function get workerStatus():String
+        {
+            return _worker==null ? null:_worker.state;
+        }
         
         public function Task(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
             this._name=name;
@@ -103,6 +129,28 @@ package jp.akb7.concurrent {
             }
             
             return result;
+        }
+        
+        protected final function doParseReciveMessage(data:Object):void {
+            var event:FutureEvent;
+            
+            if(data is Fault) {
+                event=new FutureEvent(FutureEvent.FAULT);
+            } else {
+                event=new FutureEvent(FutureEvent.RESULT);
+            }
+            event.data=data;
+            dispatchEvent(event);
+        }
+        
+        protected final function setupMessageChannel():void{
+            //メッセージチャンネル作成
+            _inchannel=_worker.createMessageChannel(Worker.current);
+            _outchannel = Worker.current.createMessageChannel(_worker);
+            
+            //共有プロパティに設定
+            _worker.setSharedProperty(OUT_CHANNEL, _inchannel);
+            _worker.setSharedProperty(IN_CHANNEL, _outchannel);
         }
     }
 }

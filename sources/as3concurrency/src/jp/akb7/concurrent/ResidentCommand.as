@@ -53,7 +53,7 @@ package jp.akb7.concurrent
             }
         }
         
-        protected override function inchannel_channelMessageHandler(event:Event):void
+        protected final function inchannel_channelMessageHandler(event:Event):void
         {    
             if (_inchannel.messageAvailable)
             {

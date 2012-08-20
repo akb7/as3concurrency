@@ -24,7 +24,6 @@ package jp.akb7.concurrent {
     import flash.concurrent.Mutex;
     import flash.display.Sprite;
     import flash.errors.IllegalOperationError;
-    import flash.events.Event;
     import flash.system.MessageChannel;
     import flash.system.MessageChannelState;
     import flash.system.Worker;
@@ -43,19 +42,19 @@ package jp.akb7.concurrent {
         
         protected var _inchannel:MessageChannel;
         
-        public function get mutex():Mutex {
+        public final function get mutex():Mutex {
             return _mutex;
         }
         
-        public function get condition():Condition {
+        public final function get condition():Condition {
             return _condition;
         }
         
-        public override function get name():String {
+        public final override function get name():String {
             return _name;
         }
         
-        public function get sharedMemory():ByteArray {
+        public final function get sharedMemory():ByteArray {
             return _sharedMemory;
         }
         
@@ -84,7 +83,7 @@ package jp.akb7.concurrent {
             }
         }
         
-        protected function doCall():void {
+        protected final function doCall():void {
             _outchannel=getOutChannel();
             _inchannel=getInChannel();
             var result:Object=(this as Callable).call();
@@ -92,25 +91,21 @@ package jp.akb7.concurrent {
             _outchannel=null;
         }
         
-        protected function doCallAsync():void {
+        protected final function doCallAsync():void {
             _outchannel=getOutChannel();
             _inchannel=getInChannel();
             (this as AsyncCallable).callAsync();
         }
         
-        protected function getOutChannel():MessageChannel {
-            var channel:MessageChannel = Worker.current.getSharedProperty(FutureTask.OUT_CHANNEL);
+        protected final function getOutChannel():MessageChannel {
+            var channel:MessageChannel = Worker.current.getSharedProperty(Task.OUT_CHANNEL);
             
             return channel;
         }
-        protected function getInChannel():MessageChannel {
-            var channel:MessageChannel = Worker.current.getSharedProperty(FutureTask.IN_CHANNEL);
+        protected final function getInChannel():MessageChannel {
+            var channel:MessageChannel = Worker.current.getSharedProperty(Task.IN_CHANNEL);
             
             return channel;
-        }
-        
-        protected function inchannel_channelMessageHandler(event:Event):void
-        {    
         }
     }
 }
