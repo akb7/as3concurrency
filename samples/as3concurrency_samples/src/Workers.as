@@ -16,15 +16,35 @@ package
         [Embed(source="../workerswfs/ResidentCommand1.swf", mimeType="application/octet-stream")]
         private static var ResidentCommand1_ByteClass:Class;
         
+        [Embed(source="../workerswfs/ConditionCommand1.swf", mimeType="application/octet-stream")]
+        private static var ConditionCommand1_ByteClass:Class;
         
+        [Embed(source="../workerswfs/MutexTestCommand1.swf", mimeType="application/octet-stream")]
+        private static var MutexTestCommand1_ByteClass:Class;
         
-        
-        
+        [Embed(source="../workerswfs/MutexTestCommand2.swf", mimeType="application/octet-stream")]
+        private static var MutexTestCommand2_ByteClass:Class;
         
         public static function get ResidentCommand1():ByteArray
         {
             return new ResidentCommand1_ByteClass();
         }
+        
+        public static function get ConditionCommand1():ByteArray
+        {
+            return new ConditionCommand1_ByteClass();
+        }
+        
+        public static function get MutexTestCommand1():ByteArray
+        {
+            return new MutexTestCommand1_ByteClass();
+        }
+        
+        public static function get MutexTestCommand2():ByteArray
+        {
+            return new MutexTestCommand2_ByteClass();
+        }
+        
         
     }
 }
