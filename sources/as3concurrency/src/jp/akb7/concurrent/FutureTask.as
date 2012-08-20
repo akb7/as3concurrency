@@ -57,7 +57,6 @@ package jp.akb7.concurrent {
             //ワーカー開始
             start();
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
-            _inchannel.receive();
         }
         
         private function inchannel_channelMessageHandler(e:Event):void {
