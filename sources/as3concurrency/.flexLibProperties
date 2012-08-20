@@ -13,6 +13,8 @@
     <classEntry path="jp.akb7.concurrent.Task"/>
     <classEntry path="jp.akb7.concurrent.URLLoader"/>
     <classEntry path="jp.akb7.concurrent.events.FutureEvent"/>
+    <classEntry path="jp.akb7.concurrent.ResidentTask"/>
+    <classEntry path="jp.akb7.concurrent.ResidentCommand"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

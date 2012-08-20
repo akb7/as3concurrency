@@ -25,15 +25,18 @@ package jp.akb7.concurrent {
     import flash.events.Event;
     import flash.system.MessageChannel;
     import flash.system.Worker;
+    import flash.system.WorkerState;
     import flash.utils.ByteArray;
     
     import jp.akb7.concurrent.events.FutureEvent;
     
     [Event(name="result", type="jp.akb7.concurrent.events.FutureEvent")]
     public class FutureTask extends Task implements Future {
-        public static const IN_CHANNEL:String="jp.akb7.concurrent.FutureTask.inchannel";
+		public static const IN_CHANNEL:String="jp.akb7.concurrent.FutureTask.inchannel";
+        public static const OUT_CHANNEL:String="jp.akb7.concurrent.FutureTask.outchannel";
         
-        private var _inchannel:MessageChannel;
+        protected var _inchannel:MessageChannel;
+		protected var _outchannel:MessageChannel;
         
         private var _callable:ByteArray;
         
@@ -41,17 +44,23 @@ package jp.akb7.concurrent {
         
         private var _result:Object;
         
-        private var _running:Boolean=false;
+        public function get isRunning():Boolean
+        {
+            return _worker != null && _worker.state == WorkerState.RUNNING;
+        }
         
-        private var _isDone:Boolean=false;
+        public function get workerStatus():String
+        {
+            return _worker==null ? null:_worker.state;
+        }
         
         public function FutureTask(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
             super(runnable, name, condition, mutex, sharedMemory);
         }
-        
+
         public final function getResult(timeout:Number=-1):Object {
             //ワーカー開始
-            doPrepare();
+            start();
             var result:Object=_inchannel.receive(true);
             
             if(result is Fault) {
@@ -61,52 +70,44 @@ package jp.akb7.concurrent {
                 terminate();
                 throw error;
             }
-            _running=false;
-            _isDone=true;
             return result;
         }
         
         public final function getResultAsync():void {
             //ワーカー開始
-            doPrepare();
+            start();
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
             _inchannel.receive();
         }
         
-        public function isDone():Boolean {
-            return _isDone;
-        }
-        
-        protected final function doPrepare():void {
-            _running=true;
-            
-            //子ワーカー作成
-            start();
-            
+        protected final override function doPrepare():void {
             //メッセージチャンネル作成
-            //メインワーカーに対するメッセージチャンネル作成
             _inchannel=_worker.createMessageChannel(Worker.current);
+			_outchannel = Worker.current.createMessageChannel(_worker);
             
             //共有プロパティに設定
-            _worker.setSharedProperty(IN_CHANNEL, _inchannel);
+            _worker.setSharedProperty(OUT_CHANNEL, _inchannel);
+			_worker.setSharedProperty(IN_CHANNEL, _outchannel);
         }
         
         protected override function doTerminateWorker():void {
             if(_worker != null) {
-                _worker.setSharedProperty(IN_CHANNEL, null);
+                _worker.setSharedProperty(OUT_CHANNEL, null);
                 _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
                 _inchannel=null;
-                _running=false;
             }
             super.doTerminateWorker();
         }
         
         private function inchannel_channelMessageHandler(e:Event):void {
+            doParseReciveMessage();
+            terminate();
+        }
+        
+        protected function doParseReciveMessage():void {
             //メッセージチャンネルにメッセージがあるかどうか
             if(_inchannel.messageAvailable) {
                 //メッセージチャンネルに受信
-                _isDone=true;
-                
                 var data:Object=_inchannel.receive();
                 var event:FutureEvent;
                 
@@ -117,8 +118,6 @@ package jp.akb7.concurrent {
                 }
                 event.data=data;
                 dispatchEvent(event);
-                
-                terminate();
             }
         }
     }
