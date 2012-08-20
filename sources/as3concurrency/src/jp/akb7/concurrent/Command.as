@@ -30,7 +30,7 @@ package jp.akb7.concurrent {
     import flash.system.Worker;
     import flash.utils.ByteArray;
     
-    public class Command extends Sprite implements Runnable {
+    public class Command extends Sprite {
         private var _mutex:Mutex;
         
         private var _condition:Condition;
