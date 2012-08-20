@@ -7,29 +7,32 @@ package {
     
     public class ResidentTaskSample1 extends Sprite {
         
-        public var task:ResidentTask;
+        public var task1:ResidentTask;
+        public var task2:ResidentTask;
         
         public function ResidentTaskSample1() {
-            task=new ResidentTask(Workers.ResidentCommand1);
+            task1=new ResidentTask(Workers.ResidentCommand1);
+            task2=new ResidentTask(Workers.ResidentCommand2);
             debugWorker();
             
-            task.start();
+            task1.start();
             
-            var sum:Object = task.invokeMethod("test",[1,2,3]);
+            var sum:Object = task1.invokeMethod("test",[1,2,3]);
             trace("sum:"+sum);
             
-            var sum1:Object = task.invokeMethod("test",[4,5,6]);
+            var sum1:Object = task1.invokeMethod("test",[4,5,6]);
             trace("sum:"+sum1);
             
             try{
-                var sum2:Object = task.invokeMethod("tesat",[4,5,6]);
+                var sum2:Object = task1.invokeMethod("tesat",[4,5,6]);
                 trace("sum:"+sum2);
             }catch(e:Error){
                 trace(e.name+":"+e.message);
             }
             
-            task.addEventListener(FutureEvent.RESULT,task_resultHandler);
-            task.invokeAsyncMethod("test",[7,8,9]);
+            task2.start();
+            task2.addEventListener(FutureEvent.RESULT,task_resultHandler);
+            task2.invokeAsyncMethod("test",[7,8,9]);
             trace("called");
             
             setInterval(debugWorker,1000);
@@ -42,7 +45,8 @@ package {
         
         private function debugWorker():void
         {
-            trace(task.isRunning,task.workerStatus);
+            trace(task1.isRunning,task1.workerStatus);
+            trace(task2.isRunning,task2.workerStatus);
         }
     }
 }

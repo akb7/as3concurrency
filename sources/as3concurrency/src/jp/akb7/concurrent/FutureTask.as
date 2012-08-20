@@ -23,36 +23,16 @@ package jp.akb7.concurrent {
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
     import flash.events.Event;
-    import flash.system.MessageChannel;
-    import flash.system.Worker;
-    import flash.system.WorkerState;
     import flash.utils.ByteArray;
-    
-    import jp.akb7.concurrent.events.FutureEvent;
     
     [Event(name="result", type="jp.akb7.concurrent.events.FutureEvent")]
     public class FutureTask extends Task implements Future {
-        public static const IN_CHANNEL:String="jp.akb7.concurrent.FutureTask.inchannel";
-        public static const OUT_CHANNEL:String="jp.akb7.concurrent.FutureTask.outchannel";
-        
-        protected var _inchannel:MessageChannel;
-        protected var _outchannel:MessageChannel;
         
         private var _callable:ByteArray;
         
         private var _thread:Task;
         
         private var _result:Object;
-        
-        public function get isRunning():Boolean
-        {
-            return _worker != null && _worker.state == WorkerState.RUNNING;
-        }
-        
-        public function get workerStatus():String
-        {
-            return _worker==null ? null:_worker.state;
-        }
         
         public function FutureTask(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
             super(runnable, name, condition, mutex, sharedMemory);
@@ -80,14 +60,14 @@ package jp.akb7.concurrent {
             _inchannel.receive();
         }
         
-        protected final override function doPrepare():void {
-            //メッセージチャンネル作成
-            _inchannel=_worker.createMessageChannel(Worker.current);
-            _outchannel = Worker.current.createMessageChannel(_worker);
-            
-            //共有プロパティに設定
-            _worker.setSharedProperty(OUT_CHANNEL, _inchannel);
-            _worker.setSharedProperty(IN_CHANNEL, _outchannel);
+        private function inchannel_channelMessageHandler(e:Event):void {
+            //メッセージチャンネルにメッセージがあるかどうか
+            if(_inchannel.messageAvailable) {
+                //メッセージチャンネルに受信
+                var data:Object=_inchannel.receive();
+                doParseReciveMessage(data);
+                terminate();
+            }
         }
         
         protected override function doTerminateWorker():void {
@@ -99,26 +79,8 @@ package jp.akb7.concurrent {
             super.doTerminateWorker();
         }
         
-        private function inchannel_channelMessageHandler(e:Event):void {
-            doParseReciveMessage();
-            terminate();
-        }
-        
-        protected function doParseReciveMessage():void {
-            //メッセージチャンネルにメッセージがあるかどうか
-            if(_inchannel.messageAvailable) {
-                //メッセージチャンネルに受信
-                var data:Object=_inchannel.receive();
-                var event:FutureEvent;
-                
-                if(data is Fault) {
-                    event=new FutureEvent(FutureEvent.FAULT);
-                } else {
-                    event=new FutureEvent(FutureEvent.RESULT);
-                }
-                event.data=data;
-                dispatchEvent(event);
-            }
+        protected final override function doPrepare():void {
+            setupMessageChannel();
         }
     }
 }
