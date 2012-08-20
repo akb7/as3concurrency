@@ -20,7 +20,7 @@
  *
  *****************************************************/
 package jp.akb7.concurrent {
-    import flash.events.Event;
+
     import flash.net.URLRequest;
     import flash.net.registerClassAlias;
     import flash.system.Worker;

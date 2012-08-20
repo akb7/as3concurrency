@@ -20,6 +20,7 @@
  *
  *****************************************************/
 package {
+
     import flash.events.Event;
     import flash.events.HTTPStatusEvent;
     import flash.events.IOErrorEvent;
@@ -33,8 +34,7 @@ package {
     import jp.akb7.concurrent.AsyncCallable;
     import jp.akb7.concurrent.Command;
     import jp.akb7.concurrent.Fault;
-    
-    [ExcludeClass]
+
     public class URLLoaderCommand extends Command implements AsyncCallable {
         {
             registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
@@ -53,12 +53,13 @@ package {
             if(_urlRequest == null) {
                 return;
             }
+
             var urlstream:URLStream=new URLStream();
             urlstream.addEventListener(Event.COMPLETE, urlstream_completeHandler);
             urlstream.addEventListener(HTTPStatusEvent.HTTP_STATUS, urlstream_httpStatusHandler);
             urlstream.addEventListener(SecurityErrorEvent.SECURITY_ERROR, urlstream_securityErrorHandler);
             urlstream.addEventListener(IOErrorEvent.IO_ERROR, urlstream_ioErrorHandler);
-            
+
             try {
                 urlstream.load(_urlRequest);
             } catch(e:Error) {

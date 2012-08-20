@@ -16,7 +16,7 @@
  *
  *  The Initial Developer of the Original Code is AKABANA.
  *  Portions created by AKABANA are Copyright (C) 2012 AKABANA.
- *   *  All Rights Reserved.
+ *  All Rights Reserved.
  *
  *****************************************************/
 package jp.akb7.concurrent {

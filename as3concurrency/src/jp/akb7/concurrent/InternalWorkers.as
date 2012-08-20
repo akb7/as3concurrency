@@ -22,7 +22,7 @@
 package jp.akb7.concurrent {
     import flash.utils.ByteArray;
     
-    public class InternalWorkers {
+    internal class InternalWorkers {
         [Embed(source="./workers/URLLoaderCommand.swf", mimeType="application/octet-stream")]
         private static var URLLoaderCommand_ByteClass:Class;
         

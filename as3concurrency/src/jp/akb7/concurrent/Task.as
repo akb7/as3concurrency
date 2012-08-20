@@ -28,11 +28,11 @@ package jp.akb7.concurrent {
     import flash.utils.ByteArray;
     
     public class Task extends EventDispatcher {
-        public static const NAME:String="jp.akb7.concurrent.Thread.name";
-        public static const RUNNABLE:String="jp.akb7.concurrent.Thread.runnable";
-        public static const CONDITION:String="jp.akb7.concurrent.Thread.condition";
-        public static const MUTEX:String="jp.akb7.concurrent.Thread.mutex";
-        public static const SHAREDMEMORY:String="jp.akb7.concurrent.Thread.sharedMemory";
+        public static const NAME:String="jp.akb7.concurrent.Task.name";
+        public static const RUNNABLE:String="jp.akb7.concurrent.Task.runnable";
+        public static const CONDITION:String="jp.akb7.concurrent.Task.condition";
+        public static const MUTEX:String="jp.akb7.concurrent.Task.mutex";
+        public static const SHAREDMEMORY:String="jp.akb7.concurrent.Task.sharedMemory";
         
         protected var _worker:Worker;
         
