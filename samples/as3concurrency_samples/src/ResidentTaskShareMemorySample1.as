@@ -12,10 +12,7 @@ package {
         public var ba:ByteArray;
         
         public function ResidentTaskShareMemorySample1() {
-            
             ba = new ByteArray();
-            ba.shareable = true;
-            
             task1=new ResidentTask(Workers.ResidentCommandWithShareMemory,"s-1",null,null,ba);
             debugWorker();
             
