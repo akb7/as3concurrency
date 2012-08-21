@@ -38,9 +38,8 @@ package jp.akb7.concurrent
         }
         
         public function doInvoke(mesasges:Array):void{
-            var funcName:String = mesasges.shift();
-            
             try{
+                var funcName:String = mesasges.shift();
                 var f:Function = this[funcName];
                 var result:Object = f.apply(null,mesasges);
                 setResult(result);

@@ -14,5 +14,9 @@ package
         public function test(i1:int,i2:int,i3:int):int{
             return i1+i2+i3;
         }
+        
+        public function getDate():Date{
+            return new Date();
+        }
     }
 }

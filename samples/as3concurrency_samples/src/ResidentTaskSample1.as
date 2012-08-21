@@ -17,6 +17,9 @@ package {
             
             task1.start();
             
+            var date:Date = task1.invokeMethod("getDate") as Date;
+            trace("date:"+date);
+            
             var sum:Object = task1.invokeMethod("test",[1,2,3]);
             trace("sum:"+sum);
             
