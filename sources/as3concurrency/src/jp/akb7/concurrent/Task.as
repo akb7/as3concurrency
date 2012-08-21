@@ -79,11 +79,12 @@ package jp.akb7.concurrent {
         }
         
         public function Task(workerByteArray:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
+            this._workerByteArray=workerByteArray;
             this._name=name;
             this._condition=condition;
             this._mutex=mutex;
             this._sharedMemory=sharedMemory;
-            this._workerByteArray=workerByteArray;
+            _sharedMemory.shareable = true;
         }
         
         public final function start():void {

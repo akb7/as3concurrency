@@ -12,7 +12,9 @@ package
         }
         
         public function test():void{
+            trace("ResidentCommandWithShareMemory:test,start");
             sharedMemory.writeUnsignedInt(1);
+            trace("ResidentCommandWithShareMemory:test,end");
         }
     }
 }
