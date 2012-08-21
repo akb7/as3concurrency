@@ -37,8 +37,6 @@ package jp.akb7.concurrent
         
         public final function invokeMethod(methodName:String,args:Array=null):Object{
             _outchannel.send([INVOKE,methodName].concat(args));
-            
-            //waiting for callback
             var result:Object = _inchannel.receive(true);
             if(result is Fault) {
                 var f:Fault=result as Fault;
@@ -51,9 +49,7 @@ package jp.akb7.concurrent
         
         public final function invokeAsyncMethod(methodName:String,args:Array=null):void{
             _outchannel.send([INVOKE,methodName].concat(args));            
-            
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
-            _inchannel.receive();
         }
         
         private function inchannel_channelMessageHandler(e:Event):void {
@@ -61,7 +57,7 @@ package jp.akb7.concurrent
             if(_inchannel.messageAvailable) {
                 //メッセージチャンネルに受信
                 var data:Object=_inchannel.receive();
-                doParseReciveMessage(data);
+                doParseReceiveMessage(data);
                 _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
             }
         }

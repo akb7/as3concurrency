@@ -131,7 +131,7 @@ package jp.akb7.concurrent {
             return result;
         }
         
-        protected final function doParseReciveMessage(data:Object):void {
+        protected final function doParseReceiveMessage(data:Object):void {
             var event:FutureEvent;
             
             if(data is Fault) {
