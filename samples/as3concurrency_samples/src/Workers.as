@@ -34,6 +34,9 @@ package
         [Embed(source="../workerswfs/ResidentCommand2.swf", mimeType="application/octet-stream")]
         private static var ResidentCommand2_ByteClass:Class;
         
+        [Embed(source="../workerswfs/ResidentCommandWithShareMemory.swf", mimeType="application/octet-stream")]
+        private static var ResidentCommandWithShareMemory_ByteClass:Class;
+        
         
         
         public static function get ResidentCommand1():ByteArray
@@ -69,6 +72,11 @@ package
         public static function get ResidentCommand2():ByteArray
         {
             return new ResidentCommand2_ByteClass();
+        }
+        
+        public static function get ResidentCommandWithShareMemory():ByteArray
+        {
+            return new ResidentCommandWithShareMemory_ByteClass();
         }
         
         
