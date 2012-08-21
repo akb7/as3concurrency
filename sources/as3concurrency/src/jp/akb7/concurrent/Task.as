@@ -84,7 +84,9 @@ package jp.akb7.concurrent {
             this._condition=condition;
             this._mutex=mutex;
             this._sharedMemory=sharedMemory;
-            _sharedMemory.shareable = true;
+            if (this._sharedMemory != null ){
+                _sharedMemory.shareable = true;
+            }
         }
         
         public final function start():void {
