@@ -30,18 +30,25 @@ package jp.akb7.concurrent {
     import flash.utils.ByteArray;
     
     public class Command extends Sprite {
+        
+        private var _name:String;
+
+CONFIG::SHAREDMEMORY{
         private var _mutex:Mutex;
         
         private var _condition:Condition;
         
-        private var _name:String;
-        
         private var _sharedMemory:ByteArray;
-        
+}
         protected var _outchannel:MessageChannel;
         
         protected var _inchannel:MessageChannel;
         
+        public final override function get name():String {
+            return _name;
+        }
+
+CONFIG::SHAREDMEMORY{
         public final function get mutex():Mutex {
             return _mutex;
         }
@@ -50,20 +57,17 @@ package jp.akb7.concurrent {
             return _condition;
         }
         
-        public final override function get name():String {
-            return _name;
-        }
-        
         public final function get sharedMemory():ByteArray {
             return _sharedMemory;
         }
-        
+}        
         public function Command() {
+            _name=Worker.current.getSharedProperty(Task.NAME);
+CONFIG::SHAREDMEMORY{
             _mutex=Worker.current.getSharedProperty(Task.MUTEX);
             _condition=Worker.current.getSharedProperty(Task.CONDITION);
-            _name=Worker.current.getSharedProperty(Task.NAME);
             _sharedMemory=Worker.current.getSharedProperty(Task.SHAREDMEMORY);
-            
+}
             if(this is AsyncCallable) {
                 doCallAsync();
             } else if(this is Callable) {

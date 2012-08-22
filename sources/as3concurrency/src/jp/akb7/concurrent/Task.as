@@ -20,8 +20,10 @@
  *
  *****************************************************/
 package jp.akb7.concurrent {
+CONFIG::SHAREDMEMORY{
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
+}
     import flash.events.EventDispatcher;
     import flash.net.registerClassAlias;
     import flash.system.MessageChannel;
@@ -58,13 +60,15 @@ package jp.akb7.concurrent {
         
         protected var _outchannel:MessageChannel;
         
+        private var _name:String;
+        
+CONFIG::SHAREDMEMORY{
         private var _mutex:Mutex;
         
         private var _condition:Condition;
         
-        private var _name:String;
-        
         private var _sharedMemory:ByteArray;
+}
         
         private var _workerByteArray:ByteArray;
         
@@ -77,8 +81,9 @@ package jp.akb7.concurrent {
         {
             return _worker==null ? null:_worker.state;
         }
-        
-        public function Task(workerByteArray:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
+
+CONFIG::SHAREDMEMORY{
+        public function Task(workerByteArray:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null) {
             this._workerByteArray=workerByteArray;
             this._name=name;
             this._condition=condition;
@@ -88,7 +93,12 @@ package jp.akb7.concurrent {
                 _sharedMemory.shareable = true;
             }
         }
-        
+}
+        public function Task(workerByteArray:ByteArray, name:String=null) {
+            this._workerByteArray=workerByteArray;
+            this._name=name;
+        }
+    
         public final function start():void {
             if( _worker == null ){
                 _worker=doCreateWorker();
@@ -115,6 +125,7 @@ package jp.akb7.concurrent {
         protected function doCreateWorker():Worker {
             var result:Worker=WorkerDomain.current.createWorker(_workerByteArray);
             
+CONFIG::SHAREDMEMORY{
             if(_sharedMemory != null) {
                 result.setSharedProperty(SHAREDMEMORY, _sharedMemory);
             }
@@ -126,7 +137,8 @@ package jp.akb7.concurrent {
             if(_condition != null) {
                 result.setSharedProperty(CONDITION, _condition);
             }
-            
+}
+
             if(_name != null) {
                 result.setSharedProperty(NAME, _name);
             }
