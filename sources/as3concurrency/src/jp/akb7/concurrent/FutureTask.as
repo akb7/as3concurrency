@@ -20,8 +20,10 @@
  *
  *****************************************************/
 package jp.akb7.concurrent {
+CONFIG::SHAREDMEMORY{
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
+}
     import flash.events.Event;
     import flash.utils.ByteArray;
     
@@ -32,12 +34,17 @@ package jp.akb7.concurrent {
         
         private var _thread:Task;
         
-        private var _result:Object;
-        
-        public function FutureTask(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null) {
-            super(runnable, name, condition, mutex, sharedMemory);
-        }
 
+CONFIG::SHAREDMEMORY{
+        public function FutureTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
+            super(runnable, name, sharedMemory, condition, mutex);
+        }
+}
+        
+        public function FutureTask(runnable:ByteArray, name:String=null){
+            super(runnable, name);
+        }
+        
         public final function getResult(timeout:Number=-1):Object {
             start();
             var result:Object=_inchannel.receive(true);

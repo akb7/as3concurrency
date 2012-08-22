@@ -16,14 +16,8 @@ package
         [Embed(source="../workerswfs/ResidentCommand1.swf", mimeType="application/octet-stream")]
         private static var ResidentCommand1_ByteClass:Class;
         
-        [Embed(source="../workerswfs/ConditionCommand1.swf", mimeType="application/octet-stream")]
-        private static var ConditionCommand1_ByteClass:Class;
         
-        [Embed(source="../workerswfs/MutexTestCommand1.swf", mimeType="application/octet-stream")]
-        private static var MutexTestCommand1_ByteClass:Class;
         
-        [Embed(source="../workerswfs/MutexTestCommand2.swf", mimeType="application/octet-stream")]
-        private static var MutexTestCommand2_ByteClass:Class;
         
         [Embed(source="../workerswfs/HighLoadCallableCommand.swf", mimeType="application/octet-stream")]
         private static var HighLoadCallableCommand_ByteClass:Class;
@@ -34,11 +28,7 @@ package
         [Embed(source="../workerswfs/ResidentCommand2.swf", mimeType="application/octet-stream")]
         private static var ResidentCommand2_ByteClass:Class;
         
-        [Embed(source="../workerswfs/ResidentCommandWithShareMemory1.swf", mimeType="application/octet-stream")]
-        private static var ResidentCommandWithShareMemory1_ByteClass:Class;
         
-        [Embed(source="../workerswfs/ResidentCommandWithShareMemory2.swf", mimeType="application/octet-stream")]
-        private static var ResidentCommandWithShareMemory2_ByteClass:Class;
         
         
         
@@ -48,20 +38,8 @@ package
             return new ResidentCommand1_ByteClass();
         }
         
-        public static function get ConditionCommand1():ByteArray
-        {
-            return new ConditionCommand1_ByteClass();
-        }
         
-        public static function get MutexTestCommand1():ByteArray
-        {
-            return new MutexTestCommand1_ByteClass();
-        }
         
-        public static function get MutexTestCommand2():ByteArray
-        {
-            return new MutexTestCommand2_ByteClass();
-        }
         
         public static function get HighLoadCallableCommand():ByteArray
         {
@@ -78,15 +56,7 @@ package
             return new ResidentCommand2_ByteClass();
         }
         
-        public static function get ResidentCommandWithShareMemory1():ByteArray
-        {
-            return new ResidentCommandWithShareMemory1_ByteClass();
-        }
         
-        public static function get ResidentCommandWithShareMemory2():ByteArray
-        {
-            return new ResidentCommandWithShareMemory2_ByteClass();
-        }
         
         
         

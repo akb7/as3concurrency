@@ -21,8 +21,10 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
+CONFIG::SHAREDMEMORY{
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
+}
     import flash.events.Event;
     import flash.utils.ByteArray;
     
@@ -30,9 +32,14 @@ package jp.akb7.concurrent
     {
         public static const INVOKE:String="jp.akb7.concurrent.ResidentTask.invoke";
         
-        public function ResidentTask(runnable:ByteArray, name:String=null, condition:Condition=null, mutex:Mutex=null, sharedMemory:ByteArray=null)
-        {
-            super(runnable, name, condition, mutex, sharedMemory);
+CONFIG::SHAREDMEMORY{
+        public function ResidentTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
+            super(runnable, name, sharedMemory, condition, mutex);
+        }
+}
+    
+        public function ResidentTask(runnable:ByteArray, name:String=null){
+            super(runnable, name);
         }
         
         public final function invokeMethod(methodName:String,args:Array=null):Object{
