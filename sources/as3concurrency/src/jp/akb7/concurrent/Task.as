@@ -108,7 +108,7 @@ CONFIG::SHAREDMEMORY{
             }
         }
         
-        public final function terminate():void {
+        public function terminate():void {
             if(_worker != null) {
                 doTerminateWorker();
             }

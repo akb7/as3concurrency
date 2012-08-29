@@ -29,6 +29,12 @@ package
 		[Embed(source="../workerswfs/HighLoadCallableCommand.swf", mimeType="application/octet-stream")]
 		private static var HighLoadCallableCommand_ByteClass:Class;
 		
+		[Embed(source="../workerswfs/ThrowErrorCommand.swf", mimeType="application/octet-stream")]
+		private static var ThrowErrorCommand_ByteClass:Class;
+		
+		[Embed(source="../workerswfs/ThrowErrorCallableCommand.swf", mimeType="application/octet-stream")]
+		private static var ThrowErrorCallableCommand_ByteClass:Class;
+		
 		
 		
 		
@@ -57,6 +63,16 @@ package
 		public static function get HighLoadCallableCommand():ByteArray
 		{
 			return new HighLoadCallableCommand_ByteClass();
+		}
+		
+		public static function get ThrowErrorCommand():ByteArray
+		{
+			return new ThrowErrorCommand_ByteClass();
+		}
+		
+		public static function get ThrowErrorCallableCommand():ByteArray
+		{
+			return new ThrowErrorCallableCommand_ByteClass();
 		}
 		
 		

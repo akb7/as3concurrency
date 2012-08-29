@@ -23,6 +23,7 @@ package jp.akb7.concurrent
 {
     import flash.display.Sprite;
     import flash.errors.IllegalOperationError;
+    import flash.events.UncaughtErrorEvent;
     import flash.system.MessageChannel;
     import flash.system.Worker;
     
@@ -65,12 +66,20 @@ CONFIG::SHAREDMEMORY{
             _condition=Worker.current.getSharedProperty(Task.CONDITION);
             _sharedMemory=Worker.current.getSharedProperty(Task.SHAREDMEMORY);
 }
-            run();
+			loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,loaderInfo_uncaughtErrorHandler);
+			run();
         }
 		
         public function run():void {
             throw new IllegalOperationError("not impl");
         }
+		
+		protected function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
+		{
+			loaderInfo.uncaughtErrorEvents.removeEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,loaderInfo_uncaughtErrorHandler);
+			event.stopImmediatePropagation();
+			event.preventDefault();
+		}
     }
 }
 

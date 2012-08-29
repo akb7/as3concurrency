@@ -31,6 +31,7 @@ CONFIG::SHAREDMEMORY{
     public class ResidentTask extends Task
     {
         public static const INVOKE:String="jp.akb7.concurrent.ResidentTask.invoke";
+		public static const INVOKE_ASYNC:String="jp.akb7.concurrent.ResidentTask.invokeAsync";
         
 CONFIG::SHAREDMEMORY{
         public function ResidentTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
@@ -56,11 +57,14 @@ CONFIG::SHAREDMEMORY{
         }
         
         public final function invokeAsyncMethod(methodName:String,args:Array=null):void{
-            doInvoke(methodName,args);
-            
-            _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+            doInvokeAsync(methodName,args);
         }
-        
+		
+		public override function terminate():void {
+			_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+			super.terminate();
+		}
+		
         private function doInvoke(methodName:String,args:Array):void{
             if( args == null ){
                 _outchannel.send([INVOKE,methodName]);     
@@ -68,19 +72,27 @@ CONFIG::SHAREDMEMORY{
                 _outchannel.send([INVOKE,methodName].concat(args));
             }
         }
-        
+		
+		private function doInvokeAsync(methodName:String,args:Array):void{
+			if( args == null ){
+				_outchannel.send([INVOKE_ASYNC,methodName]);     
+			} else {
+				_outchannel.send([INVOKE_ASYNC,methodName].concat(args));
+			}
+		}
+		
         private function inchannel_channelMessageHandler(e:Event):void {
             //メッセージチャンネルにメッセージがあるかどうか
             if(_inchannel.messageAvailable) {
                 //メッセージチャンネルに受信
                 var data:Object=_inchannel.receive();
                 doParseReceiveMessage(data);
-                _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
             }
         }
         
         protected final override function doPrepare():void {
             setupMessageChannel();
+			_inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
     }
 }
