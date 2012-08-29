@@ -3,7 +3,6 @@
   <includeClasses>
     <classEntry path="jp.akb7.concurrent.AsyncCallable"/>
     <classEntry path="jp.akb7.concurrent.Callable"/>
-    <classEntry path="jp.akb7.concurrent.Command"/>
     <classEntry path="jp.akb7.concurrent.ExecutorService"/>
     <classEntry path="jp.akb7.concurrent.Fault"/>
     <classEntry path="jp.akb7.concurrent.Future"/>

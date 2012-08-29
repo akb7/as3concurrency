@@ -162,8 +162,8 @@ CONFIG::SHAREDMEMORY{
             //メッセージチャンネル作成
             _inchannel=_worker.createMessageChannel(Worker.current);
             _outchannel = Worker.current.createMessageChannel(_worker);
-            
-            //共有プロパティに設定
+
+			//共有プロパティに設定
             _worker.setSharedProperty(OUT_CHANNEL, _inchannel);
             _worker.setSharedProperty(IN_CHANNEL, _outchannel);
         }

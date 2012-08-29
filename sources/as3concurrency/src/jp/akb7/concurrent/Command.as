@@ -20,67 +20,23 @@
  *
  *****************************************************/
 package jp.akb7.concurrent {
-    import flash.concurrent.Condition;
-    import flash.concurrent.Mutex;
-    import flash.display.Sprite;
     import flash.errors.IllegalOperationError;
     import flash.system.MessageChannel;
     import flash.system.MessageChannelState;
     import flash.system.Worker;
-    import flash.utils.ByteArray;
     
-    public class Command extends Sprite {
-        
-        private var _name:String;
-
-CONFIG::SHAREDMEMORY{
-        private var _mutex:Mutex;
-        
-        private var _condition:Condition;
-        
-        private var _sharedMemory:ByteArray;
-}
-        protected var _outchannel:MessageChannel;
-        
-        protected var _inchannel:MessageChannel;
-        
-        public final override function get name():String {
-            return _name;
-        }
-
-CONFIG::SHAREDMEMORY{
-        public final function get mutex():Mutex {
-            return _mutex;
-        }
-        
-        public final function get condition():Condition {
-            return _condition;
-        }
-        
-        public final function get sharedMemory():ByteArray {
-            return _sharedMemory;
-        }
-}        
-        public function Command() {
-            _name=Worker.current.getSharedProperty(Task.NAME);
-CONFIG::SHAREDMEMORY{
-            _mutex=Worker.current.getSharedProperty(Task.MUTEX);
-            _condition=Worker.current.getSharedProperty(Task.CONDITION);
-            _sharedMemory=Worker.current.getSharedProperty(Task.SHAREDMEMORY);
-}
+    public class Command extends WorkerSprite {
+                
+        public override function run():void {
             if(this is AsyncCallable) {
                 doCallAsync();
             } else if(this is Callable) {
                 doCall();
             } else {
-                run();
-            }
+				throw new IllegalOperationError("This class must implements the Callable or AsyncCallable");
+			}
         }
-        
-        public function run():void {
-            throw new IllegalOperationError("not impl");
-        }
-        
+		
         protected final function setResult(result:Object):void {
             if(_outchannel != null && _outchannel.state == MessageChannelState.OPEN) {
                 _outchannel.send(result);

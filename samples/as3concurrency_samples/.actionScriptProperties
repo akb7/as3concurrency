@@ -29,6 +29,7 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
+      <libraryPathEntry kind="3" linkType="1" path="/as3concurrency/bin/as3concurrency.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -43,10 +44,10 @@
   </applications>
   <modules/>
   <workers managerFilePath="src/Workers.as">
-    <worker embed="true" path="src/ResidentCommand1.as"/>
+    <worker embed="true" path="src/HighLoadCallableCommand.as"/>
     <worker embed="true" path="src/HighLoadCommand.as"/>
     <worker embed="true" path="src/ResidentCommand2.as"/>
-    <worker embed="true" path="src/HighLoadCallableCommand.as"/>
+    <worker embed="true" path="src/ResidentCommand1.as"/>
   </workers>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
