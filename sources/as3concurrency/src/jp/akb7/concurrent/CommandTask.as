@@ -37,7 +37,7 @@ CONFIG::SHAREDMEMORY{
         
 
 CONFIG::SHAREDMEMORY{
-        public function FutureTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
+        public function CommandTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
             super(runnable, name, sharedMemory, condition, mutex);
         }
 }

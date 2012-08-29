@@ -1,6 +1,5 @@
 package {
     import flash.display.Sprite;
-    import flash.utils.setInterval;
     
     import jp.akb7.concurrent.ResidentTask;
     import jp.akb7.concurrent.events.CommandEvent;
@@ -32,18 +31,19 @@ package {
             }catch(e:Error){
                 trace(e.name+":"+e.message);
             }
+			
+			task1.terminate();
             
             task2.start();
             task2.addEventListener(CommandEvent.RESULT,task_resultHandler);
             task2.invokeAsyncMethod("test",[7,8,9]);
             trace("called");
-            
-            setInterval(debugWorker,1000);
         }
         
         protected function task_resultHandler(event:CommandEvent):void
         {
             trace("sum:"+event.data);
+			task2.terminate();
         }
         
         private function debugWorker():void

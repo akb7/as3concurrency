@@ -28,7 +28,7 @@ package jp.akb7.concurrent
         private static var URLLoaderCommand_ByteClass:Class;
         
         internal static function get URLLoaderCommand():ByteArray {
-            return new URLLoaderCommand_ByteClass();
+            return new URLLoaderCommand_ByteClass(); 
         }
     }
 }

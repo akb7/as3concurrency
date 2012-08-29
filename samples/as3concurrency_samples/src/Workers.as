@@ -34,6 +34,7 @@ package
 		
 		
 		
+		
 		public static function get ResidentCommand1():ByteArray
 		{
 			return new ResidentCommand1_ByteClass();
@@ -57,6 +58,7 @@ package
 		{
 			return new HighLoadCallableCommand_ByteClass();
 		}
+		
 		
 		
 		

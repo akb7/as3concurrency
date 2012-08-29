@@ -36,6 +36,14 @@ package jp.akb7.concurrent
             _inchannel=getInChannel();
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
+		
+		public final function terminate():void {
+			if(_inchannel != null) {
+				_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+			}
+			_inchannel = null;
+			_outchannel = null;
+		}
         
         public function doInvoke(mesasges:Array):void{
             try{
