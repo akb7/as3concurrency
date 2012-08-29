@@ -19,18 +19,9 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent.events {
-    import flash.events.Event;
-    
-    public class FutureEvent extends Event {
-        public static const RESULT:String="result";
-        public static const FAULT:String="fault";
-        
-        public var data:Object;
-        
-        public function FutureEvent(type:String) {
-            super(type, false, false);
-        }
+package jp.akb7.concurrent.services
+{
+    public interface ExecutorService {
     }
 }
 

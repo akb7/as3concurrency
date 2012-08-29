@@ -19,7 +19,8 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
+package jp.akb7.concurrent
+{
     import flash.display.Sprite;
     import flash.errors.IllegalOperationError;
     import flash.system.MessageChannel;

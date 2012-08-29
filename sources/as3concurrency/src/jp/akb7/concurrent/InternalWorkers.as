@@ -19,7 +19,8 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
+package jp.akb7.concurrent
+{
     import flash.utils.ByteArray;
     
     internal class InternalWorkers {
@@ -27,7 +28,7 @@ package jp.akb7.concurrent {
         private static var URLLoaderCommand_ByteClass:Class;
         
         internal static function get URLLoaderCommand():ByteArray {
-            return new URLLoaderCommand_ByteClass();
+            return new URLLoaderCommand_ByteClass(); 
         }
     }
 }

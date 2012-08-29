@@ -19,7 +19,8 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
+package jp.akb7.concurrent
+{
 CONFIG::SHAREDMEMORY{
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
@@ -27,8 +28,8 @@ CONFIG::SHAREDMEMORY{
     import flash.events.Event;
     import flash.utils.ByteArray;
     
-    [Event(name="result", type="jp.akb7.concurrent.events.FutureEvent")]
-    public class FutureTask extends Task implements Future {
+    [Event(name="result", type="jp.akb7.concurrent.events.CommandEvent")]
+    public class CommandTask extends Task {
         
         private var _callable:ByteArray;
         
@@ -36,12 +37,12 @@ CONFIG::SHAREDMEMORY{
         
 
 CONFIG::SHAREDMEMORY{
-        public function FutureTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
+        public function CommandTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
             super(runnable, name, sharedMemory, condition, mutex);
         }
 }
         
-        public function FutureTask(runnable:ByteArray, name:String=null){
+        public function CommandTask(runnable:ByteArray, name:String=null){
             super(runnable, name);
         }
         

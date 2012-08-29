@@ -19,7 +19,8 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
+package jp.akb7.concurrent
+{
     import flash.errors.IllegalOperationError;
     import flash.system.MessageChannel;
     import flash.system.MessageChannelState;
@@ -46,9 +47,10 @@ package jp.akb7.concurrent {
         protected final function doCall():void {
             _outchannel=getOutChannel();
             _inchannel=getInChannel();
-            var result:Object=(this as Callable).call();
+			const result:Object=(this as Callable).call();
             setResult(result);
             _outchannel=null;
+			_inchannel=null;
         }
         
         protected final function doCallAsync():void {
