@@ -34,20 +34,20 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="FutureTaskSample2.as"/>
-    <application path="FutureTaskSample3.as"/>
-    <application path="TaskSample1.as"/>
-    <application path="FutureTaskSample1.as"/>
-    <application path="ResidentTaskSample1.as"/>
-    <application path="URLLoaderSample2.as"/>
+    <application path="CommandTaskSample3.as"/>
     <application path="URLLoaderSample1.as"/>
+    <application path="CommandTaskSample2.as"/>
+    <application path="URLLoaderSample2.as"/>
+    <application path="CommandTaskSample1.as"/>
+    <application path="ResidentTaskSample1.as"/>
+    <application path="TaskSample1.as"/>
   </applications>
   <modules/>
   <workers managerFilePath="src/Workers.as">
-    <worker embed="true" path="src/HighLoadCallableCommand.as"/>
-    <worker embed="true" path="src/HighLoadCommand.as"/>
-    <worker embed="true" path="src/ResidentCommand2.as"/>
     <worker embed="true" path="src/ResidentCommand1.as"/>
+    <worker embed="true" path="src/HighLoadCommand.as"/>
+    <worker embed="true" path="src/HighLoadCallableCommand.as"/>
+    <worker embed="true" path="src/ResidentCommand2.as"/>
   </workers>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>

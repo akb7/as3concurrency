@@ -19,13 +19,14 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
-
+package jp.akb7.concurrent
+{
     import flash.net.URLRequest;
     import flash.net.registerClassAlias;
     import flash.system.Worker;
+    import flash.utils.ByteArray;
     
-    public class URLLoader extends FutureTask {
+    public class URLLoader extends CommandTask {
 
         {
             registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
@@ -34,8 +35,11 @@ package jp.akb7.concurrent {
         
         private var _req:URLRequest;
         
-        public function URLLoader() {
-            super(InternalWorkers.URLLoaderCommand);
+        public function URLLoader(bytearry:ByteArray=null) {
+			if( bytearry == null ){
+				bytearry = InternalWorkers.URLLoaderCommand;
+			}
+			super(bytearry);
         }
         
         public function load(req:URLRequest, timeout:Number=-1):Object {

@@ -1,14 +1,14 @@
 package {
     import flash.display.Sprite;
     
-    import jp.akb7.concurrent.FutureTask;
+    import jp.akb7.concurrent.CommandTask;
     
-    public class FutureTaskSample3 extends Sprite {
+    public class CommandTaskSample3 extends Sprite {
         
-        public function FutureTaskSample3() {
+        public function CommandTaskSample3() {
             
             //同期処理1
-            var task:FutureTask=new FutureTask(Workers.HighLoadCallableCommand);
+            var task:CommandTask=new CommandTask(Workers.HighLoadCallableCommand);
             var result:String=task.getResult() as String;
             trace(result);
             
@@ -17,7 +17,7 @@ package {
             trace(task);
             
             //同期処理2
-            task=new FutureTask(Workers.HighLoadCallableCommand);
+            task=new CommandTask(Workers.HighLoadCallableCommand);
             result=task.getResult() as String;
             trace(result);
             

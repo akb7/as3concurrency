@@ -19,9 +19,19 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
+package jp.akb7.concurrent.events
+{
+    import flash.events.Event;
     
-    public interface ExecutorService {
+    public class CommandEvent extends Event {
+        public static const RESULT:String="result";
+        public static const FAULT:String="fault";
+        
+        public var data:Object;
+        
+        public function CommandEvent(type:String) {
+            super(type, false, false);
+        }
     }
 }
 

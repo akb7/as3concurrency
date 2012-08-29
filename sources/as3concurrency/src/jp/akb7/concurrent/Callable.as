@@ -19,8 +19,8 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
-    
+package jp.akb7.concurrent
+{
     public interface Callable {
         function call():Object;
     }
