@@ -30,8 +30,6 @@ CONFIG::SHAREDMEMORY{
     
     public class ResidentTask extends Task
     {
-        public static const INVOKE:String="jp.akb7.concurrent.ResidentTask.invoke";
-		public static const INVOKE_ASYNC:String="jp.akb7.concurrent.ResidentTask.invokeAsync";
         
 CONFIG::SHAREDMEMORY{
         public function ResidentTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
@@ -67,17 +65,17 @@ CONFIG::SHAREDMEMORY{
 		
         private function doInvoke(methodName:String,args:Array):void{
             if( args == null ){
-                _outchannel.send([INVOKE,methodName]);     
+                _outchannel.send([ResidentConsts.INVOKE,methodName]);     
             } else {
-                _outchannel.send([INVOKE,methodName].concat(args));
+                _outchannel.send([ResidentConsts.INVOKE,methodName].concat(args));
             }
         }
 		
 		private function doInvokeAsync(methodName:String,args:Array):void{
 			if( args == null ){
-				_outchannel.send([INVOKE_ASYNC,methodName]);     
+				_outchannel.send([ResidentConsts.INVOKE_ASYNC,methodName]);     
 			} else {
-				_outchannel.send([INVOKE_ASYNC,methodName].concat(args));
+				_outchannel.send([ResidentConsts.INVOKE_ASYNC,methodName].concat(args));
 			}
 		}
 		

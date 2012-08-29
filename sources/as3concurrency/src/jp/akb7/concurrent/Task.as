@@ -37,20 +37,6 @@ CONFIG::SHAREDMEMORY{
     
     public class Task extends EventDispatcher {
         
-        public static const IN_CHANNEL:String="jp.akb7.concurrent.FutureTask.inchannel";
-        
-        public static const OUT_CHANNEL:String="jp.akb7.concurrent.FutureTask.outchannel";
-        
-        public static const NAME:String="jp.akb7.concurrent.Task.name";
-        
-        public static const RUNNABLE:String="jp.akb7.concurrent.Task.runnable";
-        
-        public static const CONDITION:String="jp.akb7.concurrent.Task.condition";
-        
-        public static const MUTEX:String="jp.akb7.concurrent.Task.mutex";
-        
-        public static const SHAREDMEMORY:String="jp.akb7.concurrent.Task.sharedMemory";
-        
         {
             registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
         }
@@ -141,7 +127,7 @@ CONFIG::SHAREDMEMORY{
 }
 
             if(_name != null) {
-                result.setSharedProperty(NAME, _name);
+                result.setSharedProperty(TaskConsts.NAME, _name);
             }
             
             return result;
@@ -165,8 +151,8 @@ CONFIG::SHAREDMEMORY{
             _outchannel = Worker.current.createMessageChannel(_worker);
 
 			//共有プロパティに設定
-            _worker.setSharedProperty(OUT_CHANNEL, _inchannel);
-            _worker.setSharedProperty(IN_CHANNEL, _outchannel);
+            _worker.setSharedProperty(TaskConsts.OUT_CHANNEL, _inchannel);
+            _worker.setSharedProperty(TaskConsts.IN_CHANNEL, _outchannel);
         }
     }
 }

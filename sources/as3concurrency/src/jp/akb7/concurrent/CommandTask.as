@@ -77,7 +77,7 @@ CONFIG::SHAREDMEMORY{
         
         protected override function doTerminateWorker():void {
             if(_worker != null) {
-                _worker.setSharedProperty(OUT_CHANNEL, null);
+                _worker.setSharedProperty(TaskConsts.OUT_CHANNEL, null);
                 _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
                 _inchannel=null;
             }

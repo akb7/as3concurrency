@@ -22,6 +22,7 @@
 package jp.akb7.concurrent
 {
     import flash.events.UncaughtErrorEvent;
+    import flash.net.registerClassAlias;
     import flash.system.MessageChannel;
     import flash.system.MessageChannelState;
     import flash.system.Worker;
@@ -29,7 +30,11 @@ package jp.akb7.concurrent
     import jp.akb7.concurrent.errors.CommandError;
     
     public class Command extends WorkerSprite {
-                
+        
+		{
+			registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
+		}
+		
         public override function run():void {
             if(this is AsyncCallable) {
                 doCallAsync();
@@ -84,12 +89,12 @@ package jp.akb7.concurrent
 		}
 		
         protected final function getOutChannel():MessageChannel {
-            var channel:MessageChannel = Worker.current.getSharedProperty(Task.OUT_CHANNEL);
+            var channel:MessageChannel = Worker.current.getSharedProperty(TaskConsts.OUT_CHANNEL);
             
             return channel;
         }
         protected final function getInChannel():MessageChannel {
-            var channel:MessageChannel = Worker.current.getSharedProperty(Task.IN_CHANNEL);
+            var channel:MessageChannel = Worker.current.getSharedProperty(TaskConsts.IN_CHANNEL);
             
             return channel;
         }
