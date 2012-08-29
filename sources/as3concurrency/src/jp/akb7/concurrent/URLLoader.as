@@ -19,13 +19,13 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
-
+package jp.akb7.concurrent
+{
     import flash.net.URLRequest;
     import flash.net.registerClassAlias;
     import flash.system.Worker;
     
-    public class URLLoader extends FutureTask {
+    public class URLLoader extends CommandTask {
 
         {
             registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);

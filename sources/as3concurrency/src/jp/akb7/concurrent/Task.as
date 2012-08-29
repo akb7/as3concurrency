@@ -19,7 +19,8 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package jp.akb7.concurrent {
+package jp.akb7.concurrent
+{
 CONFIG::SHAREDMEMORY{
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
@@ -32,7 +33,7 @@ CONFIG::SHAREDMEMORY{
     import flash.system.WorkerState;
     import flash.utils.ByteArray;
     
-    import jp.akb7.concurrent.events.FutureEvent;
+    import jp.akb7.concurrent.events.CommandEvent;
     
     public class Task extends EventDispatcher {
         
@@ -147,12 +148,12 @@ CONFIG::SHAREDMEMORY{
         }
         
         protected final function doParseReceiveMessage(data:Object):void {
-            var event:FutureEvent;
+            var event:CommandEvent;
             
             if(data is Fault) {
-                event=new FutureEvent(FutureEvent.FAULT);
+                event=new CommandEvent(CommandEvent.FAULT);
             } else {
-                event=new FutureEvent(FutureEvent.RESULT);
+                event=new CommandEvent(CommandEvent.RESULT);
             }
             event.data=data;
             dispatchEvent(event);

@@ -3,14 +3,11 @@
   <includeClasses>
     <classEntry path="jp.akb7.concurrent.AsyncCallable"/>
     <classEntry path="jp.akb7.concurrent.Callable"/>
-    <classEntry path="jp.akb7.concurrent.ExecutorService"/>
+    <classEntry path="jp.akb7.concurrent.services.ExecutorService"/>
     <classEntry path="jp.akb7.concurrent.Fault"/>
-    <classEntry path="jp.akb7.concurrent.Future"/>
-    <classEntry path="jp.akb7.concurrent.FutureTask"/>
     <classEntry path="jp.akb7.concurrent.InternalWorkers"/>
     <classEntry path="jp.akb7.concurrent.Task"/>
     <classEntry path="jp.akb7.concurrent.URLLoader"/>
-    <classEntry path="jp.akb7.concurrent.events.FutureEvent"/>
     <classEntry path="jp.akb7.concurrent.ResidentTask"/>
     <classEntry path="jp.akb7.concurrent.ResidentCommand"/>
   </includeClasses>

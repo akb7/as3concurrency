@@ -3,7 +3,7 @@ package {
     import flash.utils.setInterval;
     
     import jp.akb7.concurrent.ResidentTask;
-    import jp.akb7.concurrent.events.FutureEvent;
+    import jp.akb7.concurrent.events.CommandEvent;
     
     public class ResidentTaskSample1 extends Sprite {
         
@@ -34,14 +34,14 @@ package {
             }
             
             task2.start();
-            task2.addEventListener(FutureEvent.RESULT,task_resultHandler);
+            task2.addEventListener(CommandEvent.RESULT,task_resultHandler);
             task2.invokeAsyncMethod("test",[7,8,9]);
             trace("called");
             
             setInterval(debugWorker,1000);
         }
         
-        protected function task_resultHandler(event:FutureEvent):void
+        protected function task_resultHandler(event:CommandEvent):void
         {
             trace("sum:"+event.data);
         }
