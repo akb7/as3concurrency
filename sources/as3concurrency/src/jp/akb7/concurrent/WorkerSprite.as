@@ -22,10 +22,11 @@
 package jp.akb7.concurrent
 {
     import flash.display.Sprite;
-    import flash.errors.IllegalOperationError;
     import flash.events.UncaughtErrorEvent;
     import flash.system.MessageChannel;
     import flash.system.Worker;
+    
+    import jp.akb7.concurrent.errors.WorkerError;
     
     internal class WorkerSprite extends Sprite {
         
@@ -71,12 +72,14 @@ CONFIG::SHAREDMEMORY{
         }
 		
         public function run():void {
-            throw new IllegalOperationError("not impl");
+            throw new WorkerError("not impl");
         }
 		
 		protected function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
 		{
-			loaderInfo.uncaughtErrorEvents.removeEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,loaderInfo_uncaughtErrorHandler);
+			if( event.error is WorkerError){
+				return;
+			}
 			event.stopImmediatePropagation();
 			event.preventDefault();
 		}

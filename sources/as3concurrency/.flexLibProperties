@@ -9,6 +9,7 @@
     <classEntry path="jp.akb7.concurrent.URLLoader"/>
     <classEntry path="jp.akb7.concurrent.ResidentTask"/>
     <classEntry path="jp.akb7.concurrent.ResidentCommand"/>
+    <classEntry path="jp.akb7.concurrent.errors.WorkerError"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
