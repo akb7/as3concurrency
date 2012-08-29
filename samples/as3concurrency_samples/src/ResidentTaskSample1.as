@@ -36,14 +36,13 @@ package {
             
             task2.start();
             task2.addEventListener(CommandEvent.RESULT,task_resultHandler);
-            task2.invokeAsyncMethod("test",[7,8,9]);
+            task2.invokeAsyncMethod("testTimeout",[7,8,9]);
             trace("called");
         }
         
         protected function task_resultHandler(event:CommandEvent):void
         {
             trace("sum:"+event.data);
-			task2.terminate();
         }
         
         private function debugWorker():void

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
-    <classEntry path="jp.akb7.concurrent.AsyncCallable"/>
     <classEntry path="jp.akb7.concurrent.Callable"/>
     <classEntry path="jp.akb7.concurrent.services.ExecutorService"/>
     <classEntry path="jp.akb7.concurrent.Fault"/>

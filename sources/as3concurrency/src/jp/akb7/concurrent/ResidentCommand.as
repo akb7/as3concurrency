@@ -21,7 +21,6 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-    import flash.errors.IllegalOperationError;
     import flash.events.Event;
     
     public class ResidentCommand extends Command
@@ -45,7 +44,7 @@ package jp.akb7.concurrent
 			_outchannel = null;
 		}
         
-        public function doInvoke(mesasges:Array):void{
+		protected final function doInvoke(mesasges:Array):void{
             try{
                 var funcName:String = mesasges.shift();
                 var f:Function = this[funcName];
@@ -59,6 +58,19 @@ package jp.akb7.concurrent
                 setResult(fault);
             }
         }
+		protected final function doInvokeAsync(mesasges:Array):void{
+			try{
+				var funcName:String = mesasges.shift();
+				var f:Function = this[funcName];
+				f.apply(null,mesasges);
+			} catch(e:Error){
+				var fault:Fault=new Fault();
+				fault.errrorID = e.errorID;
+				fault.message = e.message;
+				fault.name = e.name;
+				setResult(fault);
+			}
+		}
         
         protected final function inchannel_channelMessageHandler(event:Event):void
         {    
@@ -72,7 +84,10 @@ package jp.akb7.concurrent
                         if( methodName == "jp.akb7.concurrent.ResidentTask.invoke"){
                             doInvoke(mesasges);
                             return;
-                        }
+                        } else if( methodName == "jp.akb7.concurrent.ResidentTask.invokeAsync"){
+							doInvokeAsync(mesasges);
+							return;
+						}
                     }
                 }
                 

@@ -22,6 +22,7 @@
 package jp.akb7.concurrent
 {
     import flash.errors.IllegalOperationError;
+    import flash.events.UncaughtErrorEvent;
     import flash.system.MessageChannel;
     import flash.system.MessageChannelState;
     import flash.system.Worker;
@@ -47,8 +48,17 @@ package jp.akb7.concurrent
         protected final function doCall():void {
             _outchannel=getOutChannel();
             _inchannel=getInChannel();
-			const result:Object=(this as Callable).call();
-            setResult(result);
+			
+			try{
+	            var result:Object=(this as Callable).call();
+	            setResult(result);
+			}catch(e:Error){
+				var f:Fault=new Fault();
+				f.errrorID=e.errorID;
+				f.name=e.name;
+				f.message=e.message;
+				setResult(f);
+			}
             _outchannel=null;
 			_inchannel=null;
         }
@@ -58,7 +68,20 @@ package jp.akb7.concurrent
             _inchannel=getInChannel();
             (this as AsyncCallable).callAsync();
         }
-        
+		
+		protected override function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
+		{
+			super.loaderInfo_uncaughtErrorHandler(event);
+			var f:Fault=new Fault();
+			var e:Error = event.error as Error;
+			if( e != null ){
+				f.errrorID=e.errorID;
+				f.name=e.name;
+				f.message=e.message;
+				setResult(f);
+			}
+		}
+		
         protected final function getOutChannel():MessageChannel {
             var channel:MessageChannel = Worker.current.getSharedProperty(Task.OUT_CHANNEL);
             
