@@ -19,7 +19,7 @@
  *  All Rights Reserved.
  *
  *****************************************************/
-package {
+package { 
 
     import flash.events.Event;
     import flash.events.HTTPStatusEvent;
