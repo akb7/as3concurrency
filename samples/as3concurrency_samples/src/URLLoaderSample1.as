@@ -7,7 +7,7 @@ package {
     
     public class URLLoaderSample1 extends Sprite {
         public function URLLoaderSample1() {
-            var req:URLRequest=new URLRequest("test.txt");
+            var req:URLRequest=new URLRequest("tests.txt");
             
             try {
                 var text:ByteArray=new URLLoader().load(req) as ByteArray;
