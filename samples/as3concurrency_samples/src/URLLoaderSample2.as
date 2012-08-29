@@ -8,7 +8,7 @@ package {
     
     public class URLLoaderSample2 extends Sprite {
         public function URLLoaderSample2() {
-            var req:URLRequest=new URLRequest("test.txt");
+            var req:URLRequest=new URLRequest("tests.txt");
             var loader:URLLoader=new URLLoader()
             loader.addEventListener(CommandEvent.RESULT, loader_resultHandler, false, 0, true);
             loader.addEventListener(CommandEvent.FAULT, loader_faultHandler, false, 0, true);
