@@ -61,7 +61,7 @@ CONFIG::SHAREDMEMORY{
         }
 }        
         public function WorkerSprite() {
-            _name=Worker.current.getSharedProperty(Task.NAME);
+            _name=Worker.current.getSharedProperty(TaskConsts.NAME);
 CONFIG::SHAREDMEMORY{
             _mutex=Worker.current.getSharedProperty(Task.MUTEX);
             _condition=Worker.current.getSharedProperty(Task.CONDITION);

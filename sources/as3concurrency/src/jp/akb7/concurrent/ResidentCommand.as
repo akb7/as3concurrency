@@ -81,10 +81,10 @@ package jp.akb7.concurrent
                     var mesasges:Array = data as Array;
                     if( mesasges.length > 0 ){
                         var methodName:String = mesasges.shift();
-                        if( methodName == "jp.akb7.concurrent.ResidentTask.invoke"){
+                        if( ResidentConsts.INVOKE == methodName){
                             doInvoke(mesasges);
                             return;
-                        } else if( methodName == "jp.akb7.concurrent.ResidentTask.invokeAsync"){
+                        } else if( ResidentConsts.INVOKE_ASYNC == methodName){
 							doInvokeAsync(mesasges);
 							return;
 						}
