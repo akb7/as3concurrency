@@ -21,11 +21,12 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-    import flash.errors.IllegalOperationError;
     import flash.events.UncaughtErrorEvent;
     import flash.system.MessageChannel;
     import flash.system.MessageChannelState;
     import flash.system.Worker;
+    
+    import jp.akb7.concurrent.errors.CommandError;
     
     public class Command extends WorkerSprite {
                 
@@ -35,7 +36,7 @@ package jp.akb7.concurrent
             } else if(this is Callable) {
                 doCall();
             } else {
-				throw new IllegalOperationError("This class must implements the Callable or AsyncCallable");
+				throw new CommandError("This class must implements the Callable or AsyncCallable");
 			}
         }
 		
