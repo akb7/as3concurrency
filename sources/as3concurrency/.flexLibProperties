@@ -10,6 +10,8 @@
     <classEntry path="jp.akb7.concurrent.ResidentTask"/>
     <classEntry path="jp.akb7.concurrent.ResidentCommand"/>
     <classEntry path="jp.akb7.concurrent.errors.WorkerError"/>
+    <classEntry path="jp.akb7.concurrent.TaskConsts"/>
+    <classEntry path="jp.akb7.concurrent.ResidentConsts"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
