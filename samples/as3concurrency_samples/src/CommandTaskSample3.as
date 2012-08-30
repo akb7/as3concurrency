@@ -12,7 +12,6 @@ package {
             var result:String=task.getResult() as String;
             trace(result);
             
-            task.terminate();
             task = null;
             trace(task);
             

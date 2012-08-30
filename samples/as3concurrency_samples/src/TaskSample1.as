@@ -7,7 +7,6 @@ package {
         public function TaskSample1() {
             var task:Task = new Task(Workers.HighLoadCommand);
 			task.start();
-			task.terminate();
         }
     }
 }

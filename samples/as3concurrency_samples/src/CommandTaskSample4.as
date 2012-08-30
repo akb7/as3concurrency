@@ -16,7 +16,6 @@ package {
             	trace(e);
 			}
             
-            task.terminate();
             task = null;
             trace(task);
             
