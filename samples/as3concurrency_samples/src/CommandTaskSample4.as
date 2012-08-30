@@ -16,9 +16,6 @@ package {
             	trace(e);
 			}
             
-            task = null;
-            trace(task);
-            
             //同期処理2
             task=new CommandTask(Workers.ThrowErrorCallableCommand);
             task.addEventListener(CommandEvent.RESULT, task_resutlHandler);
