@@ -105,7 +105,11 @@ CONFIG::SHAREDMEMORY{
         }
         
         protected function doTerminateWorker():void {
+			_worker.setSharedProperty(TaskConsts.OUT_CHANNEL, null);
+			_worker.setSharedProperty(TaskConsts.IN_CHANNEL, null);
             _worker.terminate();
+			_inchannel = null;
+			_outchannel = null;
             _worker=null;
         }
         

@@ -58,6 +58,7 @@ package jp.akb7.concurrent
                 setResult(fault);
             }
         }
+		
 		protected final function doInvokeAsync(mesasges:Array):void{
 			try{
 				var funcName:String = mesasges.shift();
@@ -92,9 +93,7 @@ package jp.akb7.concurrent
                 }
                 
                 var fault:Fault=new Fault();
-                fault.errrorID = 0;
-                fault.message = "Invoke Error";
-                fault.name = "jp.akb7.concurrent.ResidentCommand.Error";
+                fault.message = "ResidentCommand Invoke Error";
                 setResult(fault);
             }
         }
