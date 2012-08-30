@@ -8,6 +8,12 @@ package jp.akb7.concurrent {
         public var name:*;
         
         public var message:*;
+		
+		public function Fault(){
+			errrorID = 0;
+			message = "Unknown";
+			name = "jp.akb7.concurrent.Fault";
+		}
     }
 }
 

@@ -33,9 +33,6 @@ CONFIG::SHAREDMEMORY{
         
         private var _callable:ByteArray;
         
-        private var _thread:Task;
-        
-
 CONFIG::SHAREDMEMORY{
         public function CommandTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
             super(runnable, name, sharedMemory, condition, mutex);
@@ -47,14 +44,17 @@ CONFIG::SHAREDMEMORY{
         }
         
         public final function getResult(timeout:Number=-1):Object {
-            start();
-            var result:Object=_inchannel.receive(true);
-            
+            var result:Object = null;
+			try{
+				start();
+				result =_inchannel.receive(true);
+			} finally{
+				terminate();
+			}
             if(result is Fault) {
                 var f:Fault=result as Fault;
                 var error:Error=new Error(f.message, f.errrorID);
                 error.name=f.name;
-                terminate();
                 throw error;
             }
             return result;
@@ -64,24 +64,20 @@ CONFIG::SHAREDMEMORY{
             start();
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
-        
+		
+		public override function terminate():void {
+			if(_worker != null) {
+				_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+			}
+			super.terminate();
+		}
+		
         private function inchannel_channelMessageHandler(e:Event):void {
-            //メッセージチャンネルにメッセージがあるかどうか
             if(_inchannel.messageAvailable) {
-                //メッセージチャンネルに受信
                 var data:Object=_inchannel.receive();
                 doParseReceiveMessage(data);
                 terminate();
             }
-        }
-        
-        protected override function doTerminateWorker():void {
-            if(_worker != null) {
-                _worker.setSharedProperty(TaskConsts.OUT_CHANNEL, null);
-                _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
-                _inchannel=null;
-            }
-            super.doTerminateWorker();
         }
         
         protected final override function doPrepare():void {
