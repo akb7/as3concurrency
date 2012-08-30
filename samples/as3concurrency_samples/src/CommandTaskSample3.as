@@ -12,18 +12,10 @@ package {
             var result:String=task.getResult() as String;
             trace(result);
             
-            task.terminate();
-            task = null;
-            trace(task);
-            
             //同期処理2
             task=new CommandTask(Workers.HighLoadCallableCommand);
             result=task.getResult() as String;
             trace(result);
-            
-            task.terminate();
-            task = null;
-            trace(task);
         }
     }
 }

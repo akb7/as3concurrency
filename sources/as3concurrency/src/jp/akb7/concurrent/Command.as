@@ -75,29 +75,32 @@ package jp.akb7.concurrent
             (this as AsyncCallable).callAsync();
         }
 		
-		protected override function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
-		{
-			super.loaderInfo_uncaughtErrorHandler(event);
-			var f:Fault=new Fault();
-			var e:Error = event.error as Error;
-			if( e != null ){
-				f.errrorID=e.errorID;
-				f.name=e.name;
-				f.message=e.message;
-				setResult(f);
-			}
-		}
-		
         protected final function getOutChannel():MessageChannel {
             var channel:MessageChannel = Worker.current.getSharedProperty(TaskConsts.OUT_CHANNEL);
             
             return channel;
         }
+		
         protected final function getInChannel():MessageChannel {
             var channel:MessageChannel = Worker.current.getSharedProperty(TaskConsts.IN_CHANNEL);
             
             return channel;
         }
+		
+		protected override function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
+		{
+			super.loaderInfo_uncaughtErrorHandler(event);
+			var e:Error = event.error as Error;
+			var f:Fault=new Fault();
+			if( e == null ){
+				f.message = "UncaughtError";
+			} else {
+				f.errrorID=e.errorID;
+				f.name=e.name;
+				f.message=e.message;
+			}
+			setResult(f);
+		}
     }
 }
 

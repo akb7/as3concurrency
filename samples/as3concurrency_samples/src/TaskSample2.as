@@ -7,7 +7,6 @@ package {
         public function TaskSample2() {
             var task:Task = new Task(Workers.ThrowErrorCommand);
 			task.start();
-			task.terminate();
         }
     }
 }

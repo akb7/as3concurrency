@@ -59,7 +59,9 @@ CONFIG::SHAREDMEMORY{
         }
 		
 		public override function terminate():void {
-			_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+			if(_worker != null) {
+				_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+			}
 			super.terminate();
 		}
 		
@@ -80,14 +82,12 @@ CONFIG::SHAREDMEMORY{
 		}
 		
         private function inchannel_channelMessageHandler(e:Event):void {
-            //メッセージチャンネルにメッセージがあるかどうか
             if(_inchannel.messageAvailable) {
-                //メッセージチャンネルに受信
                 var data:Object=_inchannel.receive();
                 doParseReceiveMessage(data);
             }
         }
-        
+		
         protected final override function doPrepare():void {
             setupMessageChannel();
 			_inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
