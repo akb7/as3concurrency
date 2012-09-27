@@ -12,12 +12,12 @@ package
             var m:Mutex = new Mutex();
             var c:Condition = new Condition(m);
             
-            var th1:Task = new Task(Workers.ConditionCommand1,"commnad-1",null,c);
-            var th2:Task = new Task(Workers.ConditionCommand1,"commnad-2",null,c);
+            var task1:Task = new Task(Workers.ConditionCommand1,"commnad-1",null,c);
+            var task2:Task = new Task(Workers.ConditionCommand1,"commnad-2",null,c);
             
             trace("main - commnads - start");
-            th1.start();
-            th2.start();
+            task1.start();
+            task2.start();
             
             trace("main - load");
             for (var i:int = 0; i < 1000000; i++) 
