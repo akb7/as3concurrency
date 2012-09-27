@@ -21,10 +21,8 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-CONFIG::SHAREDMEMORY{
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
-}
     import flash.events.Event;
     import flash.utils.ByteArray;
     
@@ -33,14 +31,9 @@ CONFIG::SHAREDMEMORY{
         
         private var _callable:ByteArray;
         
-CONFIG::SHAREDMEMORY{
+
         public function CommandTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
             super(runnable, name, sharedMemory, condition, mutex);
-        }
-}
-        
-        public function CommandTask(runnable:ByteArray, name:String=null){
-            super(runnable, name);
         }
         
         public final function getResult(timeout:Number=-1):Object {

@@ -17,7 +17,7 @@ package {
         
         public function ResidentTaskShareMemorySample2() {
             ba = new ByteArray();
-            task1=new ResidentTask(Workers.ResidentCommandWithShareMemory2,"s-2",null,null,ba);
+            task1=new ResidentTask(Workers.ResidentCommandWithShareMemory2,"s-2",ba);
             debugWorker();
             
             task1.start();

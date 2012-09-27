@@ -1,8 +1,8 @@
 package 
 {
-    import jp.akb7.concurrent.WorkerSprite;
+    import jp.akb7.concurrent.Command;
     
-    public class ConditionCommand1 extends WorkerSprite 
+    public class ConditionCommand1 extends Command 
     {
         public override function run():void {
             trace(name+":ConditionCommand.run() - wait");

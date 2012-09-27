@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="as3concurrency.as" projectUUID="b2155cce-9162-4e28-a3bb-e50fbbf349a0" version="11">
-  <compiler additionalCompilerArguments="-locale -define CONFIG::SHAREDMEMORY false -debug=true -optimize=false -locale -swf-version=17 -target-player=11.4" autoRSLOrdering="true" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="11.4.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale -debug=true -optimize=false -locale -swf-version=18 -target-player=11.5" autoRSLOrdering="true" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="11.5.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">

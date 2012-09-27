@@ -12,8 +12,8 @@ package
             var m:Mutex = new Mutex();
             var c:Condition = new Condition(m);
             
-            var th1:Task = new Task(Workers.ConditionCommand1,"commnad-1",c);
-            var th2:Task = new Task(Workers.ConditionCommand1,"commnad-2",c);
+            var th1:Task = new Task(Workers.ConditionCommand1,"commnad-1",null,c);
+            var th2:Task = new Task(Workers.ConditionCommand1,"commnad-2",null,c);
             
             trace("main - commnads - start");
             th1.start();
