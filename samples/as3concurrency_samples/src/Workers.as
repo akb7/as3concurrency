@@ -16,10 +16,6 @@ package
 		[Embed(source="../workerswfs/ResidentCommand1.swf", mimeType="application/octet-stream")]
 		private static var ResidentCommand1_ByteClass:Class;
 		
-		
-		
-		
-		
 		[Embed(source="../workerswfs/HighLoadCommand.swf", mimeType="application/octet-stream")]
 		private static var HighLoadCommand_ByteClass:Class;
 		
@@ -34,6 +30,24 @@ package
 		
 		[Embed(source="../workerswfs/ThrowErrorCallableCommand.swf", mimeType="application/octet-stream")]
 		private static var ThrowErrorCallableCommand_ByteClass:Class;
+		
+		[Embed(source="../workerswfs/ConditionCommand1.swf", mimeType="application/octet-stream")]
+		private static var ConditionCommand1_ByteClass:Class;
+		
+		[Embed(source="../workerswfs/MutexTestCommand1.swf", mimeType="application/octet-stream")]
+		private static var MutexTestCommand1_ByteClass:Class;
+		
+		[Embed(source="../workerswfs/MutexTestCommand2.swf", mimeType="application/octet-stream")]
+		private static var MutexTestCommand2_ByteClass:Class;
+		
+		[Embed(source="../workerswfs/NestCallCommand.swf", mimeType="application/octet-stream")]
+		private static var NestCallCommand_ByteClass:Class;
+		
+		[Embed(source="../workerswfs/ResidentCommandWithShareMemory1.swf", mimeType="application/octet-stream")]
+		private static var ResidentCommandWithShareMemory1_ByteClass:Class;
+		
+		[Embed(source="../workerswfs/ResidentCommandWithShareMemory2.swf", mimeType="application/octet-stream")]
+		private static var ResidentCommandWithShareMemory2_ByteClass:Class;
 		
 		
 		
@@ -73,6 +87,36 @@ package
 		public static function get ThrowErrorCallableCommand():ByteArray
 		{
 			return new ThrowErrorCallableCommand_ByteClass();
+		}
+		
+		public static function get ConditionCommand1():ByteArray
+		{
+			return new ConditionCommand1_ByteClass();
+		}
+		
+		public static function get MutexTestCommand1():ByteArray
+		{
+			return new MutexTestCommand1_ByteClass();
+		}
+		
+		public static function get MutexTestCommand2():ByteArray
+		{
+			return new MutexTestCommand2_ByteClass();
+		}
+		
+		public static function get NestCallCommand():ByteArray
+		{
+			return new NestCallCommand_ByteClass();
+		}
+		
+		public static function get ResidentCommandWithShareMemory1():ByteArray
+		{
+			return new ResidentCommandWithShareMemory1_ByteClass();
+		}
+		
+		public static function get ResidentCommandWithShareMemory2():ByteArray
+		{
+			return new ResidentCommandWithShareMemory2_ByteClass();
 		}
 		
 		

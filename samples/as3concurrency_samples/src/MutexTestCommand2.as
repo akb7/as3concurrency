@@ -1,8 +1,8 @@
 package 
 {
-    import jp.akb7.concurrent.WorkerSprite;
+    import jp.akb7.concurrent.Command;
 
-    public class MutexTestCommand2 extends WorkerSprite 
+    public class MutexTestCommand2 extends Command 
     {
         public override function run():void{
             
