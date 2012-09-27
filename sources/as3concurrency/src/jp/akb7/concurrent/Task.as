@@ -21,10 +21,9 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-CONFIG::SHAREDMEMORY{
+
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
-}
     import flash.events.EventDispatcher;
     import flash.net.registerClassAlias;
     import flash.system.MessageChannel;
@@ -48,14 +47,12 @@ CONFIG::SHAREDMEMORY{
         protected var _outchannel:MessageChannel;
         
         private var _name:String;
-        
-CONFIG::SHAREDMEMORY{
+
         private var _mutex:Mutex;
         
         private var _condition:Condition;
         
         private var _sharedMemory:ByteArray;
-}
         
         private var _workerByteArray:ByteArray;
         
@@ -69,7 +66,7 @@ CONFIG::SHAREDMEMORY{
             return _worker==null ? null:_worker.state;
         }
 
-CONFIG::SHAREDMEMORY{
+
         public function Task(workerByteArray:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null) {
             this._workerByteArray=workerByteArray;
             this._name=name;
@@ -79,11 +76,6 @@ CONFIG::SHAREDMEMORY{
             if (this._sharedMemory != null ){
                 _sharedMemory.shareable = true;
             }
-        }
-}
-        public function Task(workerByteArray:ByteArray, name:String=null) {
-            this._workerByteArray=workerByteArray;
-            this._name=name;
         }
     
         public final function start():void {
@@ -115,20 +107,18 @@ CONFIG::SHAREDMEMORY{
         
         protected function doCreateWorker():Worker {
             var result:Worker=WorkerDomain.current.createWorker(_workerByteArray);
-            
-CONFIG::SHAREDMEMORY{
+
             if(_sharedMemory != null) {
-                result.setSharedProperty(SHAREDMEMORY, _sharedMemory);
+                result.setSharedProperty(TaskConsts.SHAREDMEMORY, _sharedMemory);
             }
             
             if(_mutex != null) {
-                result.setSharedProperty(MUTEX, _mutex);
+                result.setSharedProperty(TaskConsts.MUTEX, _mutex);
             }
             
             if(_condition != null) {
-                result.setSharedProperty(CONDITION, _condition);
+                result.setSharedProperty(TaskConsts.CONDITION, _condition);
             }
-}
 
             if(_name != null) {
                 result.setSharedProperty(TaskConsts.NAME, _name);

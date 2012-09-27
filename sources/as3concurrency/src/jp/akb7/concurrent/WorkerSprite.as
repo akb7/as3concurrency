@@ -21,10 +21,13 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
+    import flash.concurrent.Condition;
+    import flash.concurrent.Mutex;
     import flash.display.Sprite;
     import flash.events.UncaughtErrorEvent;
     import flash.system.MessageChannel;
     import flash.system.Worker;
+    import flash.utils.ByteArray;
     
     import jp.akb7.concurrent.errors.WorkerError;
     
@@ -32,13 +35,12 @@ package jp.akb7.concurrent
         
         private var _name:String;
 
-CONFIG::SHAREDMEMORY{
         private var _mutex:Mutex;
         
         private var _condition:Condition;
         
         private var _sharedMemory:ByteArray;
-}
+
         protected var _outchannel:MessageChannel;
         
         protected var _inchannel:MessageChannel;
@@ -47,7 +49,7 @@ CONFIG::SHAREDMEMORY{
             return _name;
         }
 
-CONFIG::SHAREDMEMORY{
+
         public final function get mutex():Mutex {
             return _mutex;
         }
@@ -59,14 +61,14 @@ CONFIG::SHAREDMEMORY{
         public final function get sharedMemory():ByteArray {
             return _sharedMemory;
         }
-}        
+
         public function WorkerSprite() {
             _name=Worker.current.getSharedProperty(TaskConsts.NAME);
-CONFIG::SHAREDMEMORY{
-            _mutex=Worker.current.getSharedProperty(Task.MUTEX);
-            _condition=Worker.current.getSharedProperty(Task.CONDITION);
-            _sharedMemory=Worker.current.getSharedProperty(Task.SHAREDMEMORY);
-}
+
+            _mutex=Worker.current.getSharedProperty(TaskConsts.MUTEX);
+            _condition=Worker.current.getSharedProperty(TaskConsts.CONDITION);
+            _sharedMemory=Worker.current.getSharedProperty(TaskConsts.SHAREDMEMORY);
+
 			loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,loaderInfo_uncaughtErrorHandler);
 			run();
         }
