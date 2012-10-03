@@ -40,14 +40,13 @@ package
 		[Embed(source="../workerswfs/MutexTestCommand2.swf", mimeType="application/octet-stream")]
 		private static var MutexTestCommand2_ByteClass:Class;
 		
-		[Embed(source="../workerswfs/NestCallCommand.swf", mimeType="application/octet-stream")]
-		private static var NestCallCommand_ByteClass:Class;
 		
 		[Embed(source="../workerswfs/ResidentCommandWithShareMemory1.swf", mimeType="application/octet-stream")]
 		private static var ResidentCommandWithShareMemory1_ByteClass:Class;
 		
 		[Embed(source="../workerswfs/ResidentCommandWithShareMemory2.swf", mimeType="application/octet-stream")]
 		private static var ResidentCommandWithShareMemory2_ByteClass:Class;
+		
 		
 		
 		
@@ -104,10 +103,6 @@ package
 			return new MutexTestCommand2_ByteClass();
 		}
 		
-		public static function get NestCallCommand():ByteArray
-		{
-			return new NestCallCommand_ByteClass();
-		}
 		
 		public static function get ResidentCommandWithShareMemory1():ByteArray
 		{
@@ -118,6 +113,7 @@ package
 		{
 			return new ResidentCommandWithShareMemory2_ByteClass();
 		}
+		
 		
 		
 		
