@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
-  <includeClasses>
-    <classEntry path="jp.akb7.concurrent.Callable"/>
-    <classEntry path="jp.akb7.concurrent.services.ExecutorService"/>
-    <classEntry path="jp.akb7.concurrent.Fault"/>
-    <classEntry path="jp.akb7.concurrent.InternalWorkers"/>
-    <classEntry path="jp.akb7.concurrent.Task"/>
-    <classEntry path="jp.akb7.concurrent.URLLoader"/>
-    <classEntry path="jp.akb7.concurrent.ResidentTask"/>
-    <classEntry path="jp.akb7.concurrent.ResidentCommand"/>
-    <classEntry path="jp.akb7.concurrent.errors.WorkerError"/>
-    <classEntry path="jp.akb7.concurrent.TaskConsts"/>
-    <classEntry path="jp.akb7.concurrent.ResidentConsts"/>
-  </includeClasses>
+  <includeClasses/>
   <includeResources/>
   <namespaceManifests/>
 </flexLibProperties>
