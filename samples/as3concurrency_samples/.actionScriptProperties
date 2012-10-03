@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="CommandTaskSample4.as" projectUUID="0746a37b-5d60-4af8-ab4a-e145bffade8c" version="11">
-  <compiler additionalCompilerArguments="-locale -debug=true -optimize=false -locale -swf-version=18 -target-player=11.5" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="false" htmlPlayerVersionCheck="false" includeNetmonSwc="false" outputFolderLocation="C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/bin-debug" outputFolderPath="bin-debug" removeUnusedRSL="true" rootURL="http://127.0.0.1/bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="11.5.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
+  <compiler additionalCompilerArguments="-locale -debug=true -optimize=false -locale -swf-version=18 -target-player=11.5" advancedTelemetry="false" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="false" htmlPlayerVersionCheck="false" includeNetmonSwc="false" outputFolderLocation="C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/bin-debug" outputFolderPath="bin-debug" removeUnusedRSL="true" rootURL="http://127.0.0.1/bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="11.5.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -53,7 +53,6 @@
   <workers managerFilePath="src/Workers.as">
     <worker embed="true" path="src/ResidentCommandWithShareMemory2.as"/>
     <worker embed="true" path="src/ResidentCommandWithShareMemory1.as"/>
-    <worker embed="true" path="src/NestCallCommand.as"/>
     <worker embed="true" path="src/MutexTestCommand2.as"/>
     <worker embed="true" path="src/MutexTestCommand1.as"/>
     <worker embed="true" path="src/ConditionCommand1.as"/>
