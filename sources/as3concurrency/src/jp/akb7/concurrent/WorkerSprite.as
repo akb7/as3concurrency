@@ -62,7 +62,7 @@ package jp.akb7.concurrent
             return _sharedMemory;
         }
 
-        public function WorkerSprite() {
+        public function WorkerSprite():void{
             _name=Worker.current.getSharedProperty(TaskConsts.NAME);
 
             _mutex=Worker.current.getSharedProperty(TaskConsts.MUTEX);
