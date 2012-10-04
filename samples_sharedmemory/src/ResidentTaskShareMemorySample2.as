@@ -1,21 +1,20 @@
 package {
     import flash.display.Bitmap;
     import flash.display.BitmapData;
-    import flash.display.Loader;
-    import flash.display.Sprite;
     import flash.geom.Rectangle;
     import flash.utils.ByteArray;
     import flash.utils.setInterval;
     
     import jp.akb7.concurrent.ResidentTask;
+    import jp.akb7.core.MainSprite;
     
-    public class ResidentTaskShareMemorySample2 extends Sprite {
+    public class ResidentTaskShareMemorySample2 extends MainSprite {
         
         public var task1:ResidentTask;
         
         public var ba:ByteArray;
         
-        public function ResidentTaskShareMemorySample2() {
+        public function main():void {
             ba = new ByteArray();
             task1=new ResidentTask(Workers.ResidentCommandWithShareMemory2,"s-2",ba);
             debugWorker();

@@ -63,7 +63,12 @@ package jp.akb7.concurrent
 			try{
 				var funcName:String = mesasges.shift();
 				var f:Function = this[funcName];
-				f.apply(null,mesasges);
+				var result:* = f.apply(null,mesasges);
+				if( result === undefined ){
+					
+				} else {
+					setResult(result);
+				}
 			} catch(e:Error){
 				var fault:Fault=new Fault();
 				fault.errrorID = e.errorID;
