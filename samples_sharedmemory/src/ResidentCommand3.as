@@ -9,7 +9,7 @@ package
     [SWF(width="0", height="0", frameRate="1")]
     public class ResidentCommand3 extends ResidentCommand
     {
-		{
+		public function init():void{
 			registerClassAlias("data.UserInfo",UserInfo);
 		}
 		

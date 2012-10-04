@@ -1,12 +1,12 @@
 package {
-    import flash.display.Sprite;
     import flash.net.URLRequest;
     import flash.utils.ByteArray;
     
     import jp.akb7.concurrent.URLLoader;
+    import jp.akb7.core.MainSprite;
     
-    public class URLLoaderSample1 extends Sprite {
-        public function URLLoaderSample1() {
+    public class URLLoaderSample1 extends MainSprite {
+		public function main():void {
             var req:URLRequest=new URLRequest("tests.txt");
             
             try {

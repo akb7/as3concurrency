@@ -1,10 +1,9 @@
 package {
-    import flash.display.Sprite;
-    
     import jp.akb7.concurrent.Task;
+    import jp.akb7.core.MainSprite;
     
-    public class TaskSample2 extends Sprite {
-        public function TaskSample2() {
+    public class TaskSample2 extends MainSprite {
+		public function main():void {
             var task:Task = new Task(Workers.ThrowErrorCommand);
 			task.start();
         }

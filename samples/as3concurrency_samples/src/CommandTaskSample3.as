@@ -1,11 +1,9 @@
 package {
-    import flash.display.Sprite;
-    
     import jp.akb7.concurrent.CommandTask;
+    import jp.akb7.core.MainSprite;
     
-    public class CommandTaskSample3 extends Sprite {
-        
-        public function CommandTaskSample3() {
+    public class CommandTaskSample3 extends MainSprite {
+		public function main():void {
             
             //同期処理1
             var task:CommandTask=new CommandTask(Workers.HighLoadCallableCommand);

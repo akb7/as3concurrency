@@ -1,12 +1,10 @@
 package {
-    import flash.display.Sprite;
-    
-    import jp.akb7.concurrent.events.CommandEvent;
     import jp.akb7.concurrent.CommandTask;
+    import jp.akb7.concurrent.events.CommandEvent;
+    import jp.akb7.core.MainSprite;
     
-    public class CommandTaskSample2 extends Sprite {
-        
-        public function CommandTaskSample2() {
+    public class CommandTaskSample2 extends MainSprite {
+		public function main():void {
             //非同期処理
             var task:CommandTask=new CommandTask(Workers.HighLoadCallableCommand);
             task.addEventListener(CommandEvent.RESULT, task_resutlHandler);
