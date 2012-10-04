@@ -23,19 +23,25 @@ package jp.akb7.core
 			_frameCount++;
 			if( _frameCount == 1 ){
 				if( "init" in this ){
-					var initfunc:Function = this["init"];
-					initfunc.apply(this);
+					var initfunc:Function = this["init"] as Function;
+					if( initfunc != null ){
+						initfunc.apply(this);
+					}
 				}
 			} else if( _frameCount == 2 ){
 				if( "prepare" in this ){
-					var preparefunc:Function = this["prepare"];
-					preparefunc.apply(this);
+					var preparefunc:Function = this["prepare"] as Function;
+					if( preparefunc != null ){
+						preparefunc.apply(this);
+					}
 				}
 			} else if( _frameCount == 3){
 				this.removeEventListener(Event.ENTER_FRAME,on_enterFrameHandler);
 				if( "main" in this ){
-					var mainfunc:Function = this["main"];
-					mainfunc.apply(this);
+					var mainfunc:Function = this["main"] as Function;
+					if( mainfunc != null ){
+						mainfunc.apply(this);
+					}
 				}
 			}
 		}
