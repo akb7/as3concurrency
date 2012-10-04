@@ -25,12 +25,12 @@ package {
         
         public function main():void{
             //同期処理
-            var list:Array = task1.invokeMethod("getUserList",[100000]) as Array;
+            var list:Array = task1.invokeMethod("getUserList",[100]) as Array;
             trace(list.length);
             
             //非同期処理
             task1.addEventListener(CommandEvent.RESULT,task1_getUserListResult);
-            task1.invokeAsyncMethod("getUserList",[100000]);
+            task1.invokeAsyncMethod("getUserList",[100]);
         }
         
         protected function task1_getUserListResult(event:CommandEvent):void
