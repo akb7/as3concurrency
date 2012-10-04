@@ -6,7 +6,7 @@ package {
     import jp.akb7.core.MainSprite;
     
     public class URLLoaderSample1 extends MainSprite {
-		public function main():void {
+        public function main():void {
             var req:URLRequest=new URLRequest("tests.txt");
             
             try {

@@ -34,8 +34,8 @@ package jp.akb7.concurrent
     
     import jp.akb7.concurrent.events.CommandEvent;
     
-	[Event(name="result", type="jp.akb7.concurrent.events.CommandEvent")]
-	[Event(name="fault", type="jp.akb7.concurrent.events.CommandEvent")]
+    [Event(name="result", type="jp.akb7.concurrent.events.CommandEvent")]
+    [Event(name="fault", type="jp.akb7.concurrent.events.CommandEvent")]
     public class Task extends EventDispatcher {
         
         {
@@ -99,11 +99,11 @@ package jp.akb7.concurrent
         }
         
         protected function doTerminateWorker():void {
-			_worker.setSharedProperty(TaskConsts.OUT_CHANNEL, null);
-			_worker.setSharedProperty(TaskConsts.IN_CHANNEL, null);
+            _worker.setSharedProperty(TaskConsts.OUT_CHANNEL, null);
+            _worker.setSharedProperty(TaskConsts.IN_CHANNEL, null);
             _worker.terminate();
-			_inchannel = null;
-			_outchannel = null;
+            _inchannel = null;
+            _outchannel = null;
             _worker=null;
         }
         
@@ -146,7 +146,7 @@ package jp.akb7.concurrent
             _inchannel=_worker.createMessageChannel(Worker.current);
             _outchannel = Worker.current.createMessageChannel(_worker);
 
-			//共有プロパティに設定
+            //共有プロパティに設定
             _worker.setSharedProperty(TaskConsts.OUT_CHANNEL, _inchannel);
             _worker.setSharedProperty(TaskConsts.IN_CHANNEL, _outchannel);
         }
