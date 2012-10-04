@@ -34,9 +34,6 @@ package
                 this.mutex.unlock();
             }
             
-            do{
-            }while(sharedMemory.bytesAvailable > 0 );
-            
             return true;
 
             trace("ResidentCommandWithShareMemory4:getUserList,end");
