@@ -18,8 +18,11 @@ package {
         
         public var mutex:Mutex;
         
+        public var list:Array;
+        
         public function init():void{
             registerClassAlias("data.UserInfo",UserInfo);
+            list = [];
         }
         
         public function prepare():void{
@@ -40,6 +43,7 @@ package {
             removeEventListener(Event.ENTER_FRAME,on_enterFrameHandler);
             readShareMemory();
             ba.clear();
+            trace("list.length",list.length);
         }
         
         protected function on_enterFrameHandler(event:Event):void
@@ -54,6 +58,7 @@ package {
             while( ba.bytesAvailable > 0 ){
                 var user:UserInfo = ba.readObject() as UserInfo;
                 trace(user.name);
+                list.push(user);
             }
             mutex.unlock();
             trace("Main:unlock");
