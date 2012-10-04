@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>samples_tasks</name>
+	<name>as3concurrency_samples</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,4 +14,11 @@
 	<natures>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>bin-debug</name>
+			<type>2</type>
+			<location>C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/bin-debug</location>
+		</link>
+	</linkedResources>
 </projectDescription>

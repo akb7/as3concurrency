@@ -1,17 +1,17 @@
 package {
-    import flash.display.Sprite;
     import flash.utils.ByteArray;
     import flash.utils.setInterval;
     
     import jp.akb7.concurrent.ResidentTask;
+    import jp.akb7.core.MainSprite;
     
-    public class ResidentTaskShareMemorySample1 extends Sprite {
+    public class ResidentTaskShareMemorySample1 extends MainSprite {
         
         public var task1:ResidentTask;
         
         public var ba:ByteArray;
         
-        public function ResidentTaskShareMemorySample1() {
+        public function main():void {
             ba = new ByteArray();
             task1=new ResidentTask(Workers.ResidentCommandWithShareMemory1,"s-1",ba);
             debugWorker();
