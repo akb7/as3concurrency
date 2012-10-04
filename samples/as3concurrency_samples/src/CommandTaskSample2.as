@@ -4,7 +4,7 @@ package {
     import jp.akb7.core.MainSprite;
     
     public class CommandTaskSample2 extends MainSprite {
-		public function main():void {
+        public function main():void {
             //非同期処理
             var task:CommandTask=new CommandTask(Workers.HighLoadCallableCommand);
             task.addEventListener(CommandEvent.RESULT, task_resutlHandler);

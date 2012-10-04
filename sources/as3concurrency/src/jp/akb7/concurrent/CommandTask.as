@@ -38,12 +38,12 @@ package jp.akb7.concurrent
         
         public final function getResult(timeout:Number=-1):Object {
             var result:Object = null;
-			try{
-				start();
-				result =_inchannel.receive(true);
-			} finally{
-				terminate();
-			}
+            try{
+                start();
+                result =_inchannel.receive(true);
+            } finally{
+                terminate();
+            }
             if(result is Fault) {
                 var f:Fault=result as Fault;
                 var error:Error=new Error(f.message, f.errrorID);
@@ -57,14 +57,14 @@ package jp.akb7.concurrent
             start();
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
-		
-		public override function terminate():void {
-			if(_worker != null) {
-				_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
-			}
-			super.terminate();
-		}
-		
+        
+        public override function terminate():void {
+            if(_worker != null) {
+                _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+            }
+            super.terminate();
+        }
+        
         private function inchannel_channelMessageHandler(e:Event):void {
             if(_inchannel.messageAvailable) {
                 var data:Object=_inchannel.receive();

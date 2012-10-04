@@ -3,7 +3,7 @@ package {
     
     public class ThrowErrorCommand extends Command {
         public override function run():void {
-			throw new Error("dummy error");
+            throw new Error("dummy error");
         }
     }
 }

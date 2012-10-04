@@ -22,16 +22,16 @@ package
             return i1+i2+i3;
         }
 
-		public function testTimeout(i1:int,i2:int,i3:int):void{
-			for(var i:int=0; i < 100000; i++) {
-				var s:String="" + i;
-			}
-			
-			setTimeout(cal,1000,i1,i2,i3);
-		}
-		
-		private function cal(i1:int,i2:int,i3:int):void{
-			setResult(i1+i2+i3);
-		}
+        public function testTimeout(i1:int,i2:int,i3:int):void{
+            for(var i:int=0; i < 100000; i++) {
+                var s:String="" + i;
+            }
+            
+            setTimeout(cal,1000,i1,i2,i3);
+        }
+        
+        private function cal(i1:int,i2:int,i3:int):void{
+            setResult(i1+i2+i3);
+        }
     }
 }

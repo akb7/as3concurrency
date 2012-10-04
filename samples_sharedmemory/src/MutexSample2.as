@@ -6,8 +6,8 @@ package
     import jp.akb7.core.MainSprite;
     
     public class MutexSample2 extends MainSprite{
-		
-		public function main():void{
+        
+        public function main():void{
             var m:Mutex = new Mutex();
             
             var task1:Task = new Task(Workers.MutexTestCommand2,"command-1",null,null,m);

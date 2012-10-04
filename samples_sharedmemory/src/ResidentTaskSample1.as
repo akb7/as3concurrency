@@ -4,12 +4,12 @@ package {
     import jp.akb7.core.MainSprite;
     
     public class ResidentTaskSample1 extends MainSprite{
-		
+        
         
         public var task1:ResidentTask;
         public var task2:ResidentTask;
-		
-		public function main():void{
+        
+        public function main():void{
             task1=new ResidentTask(Workers.ResidentCommand1);
             task2=new ResidentTask(Workers.ResidentCommand2);
             debugWorker();
@@ -31,12 +31,12 @@ package {
             }catch(e:Error){
                 trace(e.name+":"+e.message);
             }
-			
-			task1.terminate();
+            
+            task1.terminate();
             
             task2.start();
             task2.addEventListener(CommandEvent.RESULT,task_resultHandler);
-			task2.addEventListener(CommandEvent.FAULT,task_faulttHandler);
+            task2.addEventListener(CommandEvent.FAULT,task_faulttHandler);
             task2.invokeAsyncMethod("testTimeout",[7,8,9]);
             trace("called");
         }
@@ -45,10 +45,10 @@ package {
         {
             trace("sum:"+event.data);
         }
-		protected function task_faulttHandler(event:CommandEvent):void
-		{
-			trace("error:"+event.data);
-		}
+        protected function task_faulttHandler(event:CommandEvent):void
+        {
+            trace("error:"+event.data);
+        }
         
         private function debugWorker():void
         {

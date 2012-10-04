@@ -3,9 +3,9 @@ package {
     import jp.akb7.core.MainSprite;
     
     public class TaskSample1 extends MainSprite {
-		public function main():void {
+        public function main():void {
             var task:Task = new Task(Workers.HighLoadCommand);
-			task.start();
+            task.start();
         }
     }
 }

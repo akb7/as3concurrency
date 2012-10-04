@@ -9,10 +9,10 @@ package
     [SWF(width="0", height="0", frameRate="1")]
     public class ResidentCommand3 extends ResidentCommand
     {
-		public function init():void{
-			registerClassAlias("data.UserInfo",UserInfo);
-		}
-		
+        public function init():void{
+            registerClassAlias("data.UserInfo",UserInfo);
+        }
+        
         public function ResidentCommand3()
         {
             super();
@@ -22,18 +22,18 @@ package
         public function getUserList(value:int):Array{
             trace("ResidentCommand33:getUserList,start");
 
-			var result:Array = [];
-			
-			for (var i:int = 0; i < value; i++) 
-			{
-				var user:UserInfo = new UserInfo();
-				user.uid = i;
-				user.name = "Name"+i;
-				result.push(user);
-			}
-			trace("ResidentCommand33:getUserList,end");
-			
-			return result;
+            var result:Array = [];
+            
+            for (var i:int = 0; i < value; i++) 
+            {
+                var user:UserInfo = new UserInfo();
+                user.uid = i;
+                user.name = "Name"+i;
+                result.push(user);
+            }
+            trace("ResidentCommand33:getUserList,end");
+            
+            return result;
         }
     }
 }
