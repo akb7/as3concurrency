@@ -38,9 +38,16 @@ package {
         protected function task1_getUserListStreamingResultHandler(event:CommandEvent):void
         {
             removeEventListener(Event.ENTER_FRAME,on_enterFrameHandler);
+            readShareMemory();
+            ba.clear();
         }
         
         protected function on_enterFrameHandler(event:Event):void
+        {
+            readShareMemory();
+        }
+        
+        private function readShareMemory():void
         {
             mutex.lock();
             trace("Main:lock");
@@ -50,6 +57,7 @@ package {
             }
             mutex.unlock();
             trace("Main:unlock");
+            
         }
     }
 }
