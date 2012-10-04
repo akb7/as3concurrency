@@ -34,6 +34,8 @@ package jp.akb7.concurrent
     
     import jp.akb7.concurrent.events.CommandEvent;
     
+	[Event(name="result", type="jp.akb7.concurrent.events.CommandEvent")]
+	[Event(name="fault", type="jp.akb7.concurrent.events.CommandEvent")]
     public class Task extends EventDispatcher {
         
         {

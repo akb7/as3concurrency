@@ -2,13 +2,13 @@ package
 {
     import flash.concurrent.Condition;
     import flash.concurrent.Mutex;
-    import flash.display.Sprite;
     
     import jp.akb7.concurrent.Task;
+    import jp.akb7.core.MainSprite;
     
-    public class ConditionSample1 extends Sprite{
+    public class ConditionSample1 extends MainSprite{
         
-        public function ConditionSample1(){
+        public function main():void{
             var m:Mutex = new Mutex();
             var c:Condition = new Condition(m);
             
