@@ -1,15 +1,15 @@
 package {
-    import flash.display.Sprite;
-    
     import jp.akb7.concurrent.ResidentTask;
     import jp.akb7.concurrent.events.CommandEvent;
+    import jp.akb7.core.MainSprite;
     
-    public class ResidentTaskSample1 extends Sprite {
+    public class ResidentTaskSample1 extends MainSprite {
+		
+		public var task1:ResidentTask;
         
-        public var task1:ResidentTask;
-        public var task2:ResidentTask;
+		public var task2:ResidentTask;
         
-        public function ResidentTaskSample1() {
+        public function main():void {
             task1=new ResidentTask(Workers.ResidentCommand1);
             task2=new ResidentTask(Workers.ResidentCommand2);
             debugWorker();
