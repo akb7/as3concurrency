@@ -50,14 +50,14 @@ package jp.akb7.concurrent
         public final function invokeAsyncMethod(methodName:String,args:Array=null):void{
             doInvokeAsync(methodName,args);
         }
-		
-		public override function terminate():void {
-			if(_worker != null) {
-				_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
-			}
-			super.terminate();
-		}
-		
+        
+        public override function terminate():void {
+            if(_worker != null) {
+                _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+            }
+            super.terminate();
+        }
+        
         private function doInvoke(methodName:String,args:Array):void{
             if( args == null ){
                 _outchannel.send([ResidentConsts.INVOKE,methodName]);     
@@ -65,25 +65,25 @@ package jp.akb7.concurrent
                 _outchannel.send([ResidentConsts.INVOKE,methodName].concat(args));
             }
         }
-		
-		private function doInvokeAsync(methodName:String,args:Array):void{
-			if( args == null ){
-				_outchannel.send([ResidentConsts.INVOKE_ASYNC,methodName]);     
-			} else {
-				_outchannel.send([ResidentConsts.INVOKE_ASYNC,methodName].concat(args));
-			}
-		}
-		
+        
+        private function doInvokeAsync(methodName:String,args:Array):void{
+            if( args == null ){
+                _outchannel.send([ResidentConsts.INVOKE_ASYNC,methodName]);     
+            } else {
+                _outchannel.send([ResidentConsts.INVOKE_ASYNC,methodName].concat(args));
+            }
+        }
+        
         private function inchannel_channelMessageHandler(e:Event):void {
             if(_inchannel.messageAvailable) {
                 var data:Object=_inchannel.receive();
                 doParseReceiveMessage(data);
             }
         }
-		
+        
         protected final override function doPrepare():void {
             setupMessageChannel();
-			_inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+            _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
     }
 }

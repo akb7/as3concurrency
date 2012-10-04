@@ -31,20 +31,20 @@ package jp.akb7.concurrent
     
     public class Command extends WorkerSprite {
         
-		{
-			registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
-		}
-		
+        {
+            registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
+        }
+        
         public override function run():void {
             if(this is AsyncCallable) {
                 doCallAsync();
             } else if(this is Callable) {
                 doCall();
             } else {
-				throw new CommandError("This class must implements the Callable or AsyncCallable");
-			}
+                throw new CommandError("This class must implements the Callable or AsyncCallable");
+            }
         }
-		
+        
         protected final function setResult(result:Object):void {
             if(_outchannel != null && _outchannel.state == MessageChannelState.OPEN) {
                 _outchannel.send(result);
@@ -54,19 +54,19 @@ package jp.akb7.concurrent
         protected final function doCall():void {
             _outchannel=getOutChannel();
             _inchannel=getInChannel();
-			
-			try{
-	            var result:Object=(this as Callable).call();
-	            setResult(result);
-			}catch(e:Error){
-				var f:Fault=new Fault();
-				f.errrorID=e.errorID;
-				f.name=e.name;
-				f.message=e.message;
-				setResult(f);
-			}
+            
+            try{
+                var result:Object=(this as Callable).call();
+                setResult(result);
+            }catch(e:Error){
+                var f:Fault=new Fault();
+                f.errrorID=e.errorID;
+                f.name=e.name;
+                f.message=e.message;
+                setResult(f);
+            }
             _outchannel=null;
-			_inchannel=null;
+            _inchannel=null;
         }
         
         protected final function doCallAsync():void {
@@ -74,33 +74,33 @@ package jp.akb7.concurrent
             _inchannel=getInChannel();
             (this as AsyncCallable).callAsync();
         }
-		
+        
         protected final function getOutChannel():MessageChannel {
             var channel:MessageChannel = Worker.current.getSharedProperty(TaskConsts.OUT_CHANNEL);
             
             return channel;
         }
-		
+        
         protected final function getInChannel():MessageChannel {
             var channel:MessageChannel = Worker.current.getSharedProperty(TaskConsts.IN_CHANNEL);
             
             return channel;
         }
-		
-		protected override function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
-		{
-			super.loaderInfo_uncaughtErrorHandler(event);
-			var e:Error = event.error as Error;
-			var f:Fault=new Fault();
-			if( e == null ){
-				f.message = "UncaughtError";
-			} else {
-				f.errrorID=e.errorID;
-				f.name=e.name;
-				f.message=e.message;
-			}
-			setResult(f);
-		}
+        
+        protected override function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
+        {
+            super.loaderInfo_uncaughtErrorHandler(event);
+            var e:Error = event.error as Error;
+            var f:Fault=new Fault();
+            if( e == null ){
+                f.message = "UncaughtError";
+            } else {
+                f.errrorID=e.errorID;
+                f.name=e.name;
+                f.message=e.message;
+            }
+            setResult(f);
+        }
     }
 }
 

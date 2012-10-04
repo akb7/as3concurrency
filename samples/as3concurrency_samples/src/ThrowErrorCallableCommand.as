@@ -4,7 +4,7 @@ package {
     
     public class ThrowErrorCallableCommand extends Command implements Callable {
         public function call():Object {
-			throw new Error("dummy error");
+            throw new Error("dummy error");
             return null;
         }
     }

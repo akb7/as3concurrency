@@ -69,22 +69,22 @@ package jp.akb7.concurrent
             _condition=Worker.current.getSharedProperty(TaskConsts.CONDITION);
             _sharedMemory=Worker.current.getSharedProperty(TaskConsts.SHAREDMEMORY);
 
-			loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,loaderInfo_uncaughtErrorHandler);
-			run();
+            loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,loaderInfo_uncaughtErrorHandler);
+            run();
         }
-		
+        
         public function run():void {
             throw new WorkerError("not impl");
         }
-		
-		protected function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
-		{
-			if( event.error is WorkerError){
-				return;
-			}
-			event.stopImmediatePropagation();
-			event.preventDefault();
-		}
+        
+        protected function loaderInfo_uncaughtErrorHandler(event:UncaughtErrorEvent):void
+        {
+            if( event.error is WorkerError){
+                return;
+            }
+            event.stopImmediatePropagation();
+            event.preventDefault();
+        }
     }
 }
 

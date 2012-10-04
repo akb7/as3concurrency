@@ -35,16 +35,16 @@ package jp.akb7.concurrent
             _inchannel=getInChannel();
             _inchannel.addEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
         }
-		
-		public final function terminate():void {
-			if(_inchannel != null) {
-				_inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
-			}
-			_inchannel = null;
-			_outchannel = null;
-		}
         
-		protected final function doInvoke(mesasges:Array):void{
+        public final function terminate():void {
+            if(_inchannel != null) {
+                _inchannel.removeEventListener(Event.CHANNEL_MESSAGE, inchannel_channelMessageHandler);
+            }
+            _inchannel = null;
+            _outchannel = null;
+        }
+        
+        protected final function doInvoke(mesasges:Array):void{
             try{
                 var funcName:String = mesasges.shift();
                 var f:Function = this[funcName];
@@ -58,25 +58,25 @@ package jp.akb7.concurrent
                 setResult(fault);
             }
         }
-		
-		protected final function doInvokeAsync(mesasges:Array):void{
-			try{
-				var funcName:String = mesasges.shift();
-				var f:Function = this[funcName];
-				var result:* = f.apply(null,mesasges);
-				if( result === undefined ){
-					
-				} else {
-					setResult(result);
-				}
-			} catch(e:Error){
-				var fault:Fault=new Fault();
-				fault.errrorID = e.errorID;
-				fault.message = e.message;
-				fault.name = e.name;
-				setResult(fault);
-			}
-		}
+        
+        protected final function doInvokeAsync(mesasges:Array):void{
+            try{
+                var funcName:String = mesasges.shift();
+                var f:Function = this[funcName];
+                var result:* = f.apply(null,mesasges);
+                if( result === undefined ){
+                    
+                } else {
+                    setResult(result);
+                }
+            } catch(e:Error){
+                var fault:Fault=new Fault();
+                fault.errrorID = e.errorID;
+                fault.message = e.message;
+                fault.name = e.name;
+                setResult(fault);
+            }
+        }
         
         protected final function inchannel_channelMessageHandler(event:Event):void
         {    
@@ -91,9 +91,9 @@ package jp.akb7.concurrent
                             doInvoke(mesasges);
                             return;
                         } else if( ResidentConsts.INVOKE_ASYNC == methodName){
-							doInvokeAsync(mesasges);
-							return;
-						}
+                            doInvokeAsync(mesasges);
+                            return;
+                        }
                     }
                 }
                 

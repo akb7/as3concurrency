@@ -36,10 +36,10 @@ package jp.akb7.concurrent
         private var _req:URLRequest;
         
         public function URLLoader(bytearry:ByteArray=null) {
-			if( bytearry == null ){
-				bytearry = InternalWorkers.URLLoaderCommand;
-			}
-			super(bytearry);
+            if( bytearry == null ){
+                bytearry = InternalWorkers.URLLoaderCommand;
+            }
+            super(bytearry);
         }
         
         public function load(req:URLRequest, timeout:Number=-1):Object {

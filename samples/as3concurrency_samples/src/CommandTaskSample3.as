@@ -3,7 +3,7 @@ package {
     import jp.akb7.core.MainSprite;
     
     public class CommandTaskSample3 extends MainSprite {
-		public function main():void {
+        public function main():void {
             
             //同期処理1
             var task:CommandTask=new CommandTask(Workers.HighLoadCallableCommand);
