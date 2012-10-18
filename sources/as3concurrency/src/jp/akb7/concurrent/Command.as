@@ -101,6 +101,14 @@ package jp.akb7.concurrent
             }
             setResult(f);
         }
+        
+        protected function setError(errorID:int, name:*, message:*):void {
+            var f:Fault=new Fault();
+            f.errrorID=errorID;
+            f.name=name;
+            f.message=message;
+            setResult(f);
+        }
     }
 }
 

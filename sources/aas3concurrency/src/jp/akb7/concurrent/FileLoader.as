@@ -21,40 +21,36 @@
  *****************************************************/
 package jp.akb7.concurrent
 {
-    import flash.net.URLRequest;
     import flash.net.registerClassAlias;
     import flash.system.Worker;
     
-    public class URLLoader extends CommandTask {
-
+    public class FileLoader extends CommandTask
+    {
         {
-            registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
             registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
         }
         
-        private var _req:URLRequest;
+        private var _path:String;
         
-        public function URLLoader() {
-            super(InternalWorkers.URLLoaderCommand);
+        public function FileLoader() {
+            super(InternalAIRWorkers.FileLoaderCommand);
         }
         
-        public function load(req:URLRequest, timeout:Number=-1):Object {
-            _req=req;
+        public function load(path:String, timeout:Number=-1):Object {
+            _path=path;
             var result:Object=getResult(timeout);
             return result;
         }
         
-        public function loadAsync(req:URLRequest):void {
-            _req=req;
+        public function loadAsync(path:String):void {
+            _path=path;
             getResultAsync();
         }
         
         protected override function doCreateWorker():Worker {
             var result:Worker=super.doCreateWorker();
-            result.setSharedProperty("jp.akb7.concurrent.URLLoaderCommand.request", _req);
+            result.setSharedProperty("jp.akb7.concurrent.FileLoaderCommand.path", _path);
             return result;
         }
     }
 }
-
-
