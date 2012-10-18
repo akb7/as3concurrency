@@ -38,7 +38,7 @@ package {
     public class URLLoaderCommand extends Command implements AsyncCallable {
 
         {
-            registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
+			registerClassAlias("jp.akb7.concurrent.Fault", jp.akb7.concurrent.Fault);
             registerClassAlias("flash.net.URLRequest", flash.net.URLRequest);
         }
         
@@ -87,14 +87,6 @@ package {
         
         protected function urlstream_ioErrorHandler(event:IOErrorEvent):void {
             setError(event.errorID, event.type, event.text);
-        }
-        
-        protected function setError(errorID:int, name:*, message:*):void {
-            var f:Fault=new Fault();
-            f.errrorID=errorID;
-            f.name=name;
-            f.message=message;
-            setResult(f);
         }
     }
 }
