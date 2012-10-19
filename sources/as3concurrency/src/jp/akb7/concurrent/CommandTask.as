@@ -32,8 +32,8 @@ package jp.akb7.concurrent
         private var _callable:ByteArray;
         
 
-        public function CommandTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null ){
-            super(runnable, name, sharedMemory, condition, mutex);
+        public function CommandTask(runnable:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null,giveAppPrivileges:Boolean=false){
+            super(runnable, name, sharedMemory, condition, mutex,giveAppPrivileges);
         }
         
         public final function getResult(timeout:Number=-1):Object {

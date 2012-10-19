@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   applicationComplete="application1_applicationCompleteHandler(event)"
+			   >
+	<fx:Script>
+		<![CDATA[
+			import flash.net.registerClassAlias;
+			
+			import mx.events.FlexEvent;
+			
+			private var fileReader:Worker;
+			private var fileReaderChannel:MessageChannel;
+			
+			protected function application1_applicationCompleteHandler(event:FlexEvent):void
+			{
+				fileReader = WorkerDomain.current.createWorker(Workers.FileReader,true);
+				
+				var file:File = new File(); 
+				file.addEventListener(Event.SELECT,file_selectHandler);
+				file.browseForOpen("select");
+			
+			}
+			
+			protected function file_selectHandler(event:Event):void
+			{
+				fileReader.setSharedProperty("path",(event.target as File).nativePath);
+				
+				fileReaderChannel = fileReader.createMessageChannel(Worker.current);
+				fileReader.setSharedProperty("channel",fileReaderChannel);
+				fileReaderChannel.addEventListener(Event.CHANNEL_MESSAGE,fileReaderChannel_channelMessageHandler);
+				
+				fileReader.start();				
+				trace(System.totalMemoryNumber);
+			}
+			
+			protected function fileReaderChannel_channelMessageHandler(event:Event):void
+			{
+				var data:Object = fileReaderChannel.receive(false);
+				trace(System.totalMemoryNumber);
+			}
+			
+		]]>
+	</fx:Script>
+	
+</s:Application>
