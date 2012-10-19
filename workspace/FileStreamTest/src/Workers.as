@@ -13,11 +13,11 @@ package
 	public class Workers
 	{
 		
-		[Embed(source="../workerswfs/Worker1.swf", mimeType="application/octet-stream")]
-		private static var Worker1_ByteClass:Class;
-		public static function get Worker1():ByteArray
+		[Embed(source="../workerswfs/FileReader.swf", mimeType="application/octet-stream")]
+		private static var FileReader_ByteClass:Class;
+		public static function get FileReader():ByteArray
 		{
-			return new Worker1_ByteClass();
+			return new FileReader_ByteClass();
 		}
 		
 	}

@@ -24,7 +24,7 @@ package jp.akb7.concurrent
     import flash.utils.ByteArray;
     
     internal class InternalAIRWorkers {
-        [Embed(source="./workers/URLLoaderCommand.swf", mimeType="application/octet-stream")]
+        [Embed(source="./workers/FileLoaderCommand.swf", mimeType="application/octet-stream")]
         private static var FileLoaderCommand_ByteClass:Class;
         
         internal static function get FileLoaderCommand():ByteArray {
