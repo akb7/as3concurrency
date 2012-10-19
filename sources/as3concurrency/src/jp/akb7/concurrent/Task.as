@@ -58,6 +58,8 @@ package jp.akb7.concurrent
         
         private var _workerByteArray:ByteArray;
         
+		private var _giveAppPrivileges:Boolean;
+		
         public function get isRunning():Boolean
         {
             return _worker != null && _worker.state == WorkerState.RUNNING;
@@ -69,12 +71,13 @@ package jp.akb7.concurrent
         }
 
 
-        public function Task(workerByteArray:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null) {
+        public function Task(workerByteArray:ByteArray, name:String=null, sharedMemory:ByteArray=null, condition:Condition=null, mutex:Mutex=null,giveAppPrivileges:Boolean=false) {
             this._workerByteArray=workerByteArray;
             this._name=name;
             this._condition=condition;
             this._mutex=mutex;
             this._sharedMemory=sharedMemory;
+			this._giveAppPrivileges = giveAppPrivileges;
             if (this._sharedMemory != null ){
                 _sharedMemory.shareable = true;
             }
@@ -108,7 +111,7 @@ package jp.akb7.concurrent
         }
         
         protected function doCreateWorker():Worker {
-            var result:Worker=WorkerDomain.current.createWorker(_workerByteArray);
+            var result:Worker=WorkerDomain.current.createWorker(_workerByteArray,_giveAppPrivileges);
 
             if(_sharedMemory != null) {
                 result.setSharedProperty(TaskConsts.SHAREDMEMORY, _sharedMemory);

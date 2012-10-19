@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="FlexAUR.mxml" projectUUID="0ea84fe2-9b35-4004-8e39-0a7667791a42" version="11">
-  <compiler additionalCompilerArguments="-locale ja_JP -debug=true -optimize=false -swf-version=18" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
+<actionScriptProperties analytics="false" mainApplicationPath="FileStreamTest.mxml" projectUUID="d22d0977-f86a-4566-997b-d3dc468537a5" version="11">
+  <compiler additionalCompilerArguments="-locale en_US -swf-version=17" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="false" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -14,13 +14,13 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="FlexAUR.mxml">
+    <application path="FileStreamTest.mxml">
       <airExcludes/>
     </application>
   </applications>
   <modules/>
   <workers managerFilePath="src/Workers.as">
-    <worker embed="true" path="src/Worker1.as"/>
+    <worker embed="true" path="src/FileReader.as"/>
   </workers>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>

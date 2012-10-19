@@ -33,7 +33,7 @@ package jp.akb7.concurrent
         private var _path:String;
         
         public function FileLoader() {
-            super(InternalAIRWorkers.FileLoaderCommand);
+            super(InternalAIRWorkers.FileLoaderCommand,null,null,null,null,true);
         }
         
         public function load(path:String, timeout:Number=-1):Object {
